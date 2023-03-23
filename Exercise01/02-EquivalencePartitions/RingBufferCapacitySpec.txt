@@ -1,0 +1,18 @@
+Specification of Equivalence Partitions and Boundary Values for RingBuffer(int capacity)
+
+(1) Valid and Invalid Equivalence Partitions
+
+// todo: list all valid and invalid partitions for the parameter capacity in form of ranges of int values 
+
+[from .. to] -> valid 
+[from .. to] -> invalid
+...
+
+
+(2) Refined Equivalence Partitions for Valid Partitions
+
+// todo: list all partitions exhibiting equivalent behavior within the partition of valid values
+
+[from .. to] -> expected behavior
+[from .. to] -> expected behavior
+...
