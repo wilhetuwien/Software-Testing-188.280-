@@ -4,9 +4,11 @@ Specification of Equivalence Partitions and Boundary Values for RingBuffer(int c
 
 // todo: list all valid and invalid partitions for the parameter capacity in form of ranges of int values 
 
-[from .. to] -> valid 
-[from .. to] -> invalid
-...
+[0 .. 2147483647] -> valid 
+An array can be of size 0 and in this case the parameter is passed as an int which is 32 bit
+[-2147483648 to  .. -1] -> invalid
+Arrays can not be initialized with negative values and throws and error
+Values outside these ranges throws compile time errors.
 
 
 (2) Refined Equivalence Partitions for Valid Partitions
