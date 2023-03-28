@@ -18,3 +18,13 @@ Values outside these ranges throws compile time errors.
 [0] -> Is both full and empty at the same time. Crash when enque.
 [1] -> Two states: full, empty. Allows enqueing.
 [2 .. 2147483647] -> Three states: empty, not empty and not full, full. Allows enqueing.
+
+
+
+State Transition Testing
+#   Sequence
+1   init(3) -empty- enqueue() -filled- dequeue() -empty-
+2   init(3) -empty- enqueue() -filled- enqueue() -filled- dequeue() -filled-
+3   init(3) -empty- enqueue() -filled- enqueue() -filled- enqueue() -full- dequeue() -filled-
+4   init(3) -empty- enqueue() -filled- enqueue() -filled- enqueue() -full- enqueue() -full-
+5   init(3) -empty- dequeue() -error-
