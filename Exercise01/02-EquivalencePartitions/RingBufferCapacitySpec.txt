@@ -15,6 +15,6 @@ Values outside these ranges throws compile time errors.
 
 // todo: list all partitions exhibiting equivalent behavior within the partition of valid values
 
-[from .. to] -> expected behavior
-[from .. to] -> expected behavior
-...
+[0] -> Is both full and empty at the same time. Crash when enque.
+[1] -> Two states: full, empty. Allows enqueing.
+[2 .. 2147483647] -> Three states: empty, not empty and not full, full. Allows enqueing.
