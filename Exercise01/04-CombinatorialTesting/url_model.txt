@@ -1,2 +1,27 @@
 # PICT model for testing URLs composed of different elements
 
+## Schema must end with :// 
+Schema: http://, ftp://
+## Host can be IPv4address or 
+## a registrated name that begins and ends 
+## with an aplhanumerical character. 
+## Each domain label is seperated by ".".
+Subdomain: www., ,
+Domain: example., tuwien.
+Top level domain: co.uk
+## Port = ":*DIGIT". If no port then ":" should be omitted
+Port: :443, ,
+## Path cannot begin with "//". It can be empty: "" or "/"
+Path: /blog/article/search, /path/, /, ,
+## Query. If query it should begin with "?" followed by one or more parameters seperated by "&"
+## Else "?" should be omitted.
+Query string separator: ?, ,
+Query string parameter: docid=720&hl=en ,
+## fragment begins with "#". The characters "/" and "?" are allowed in the fragment identifier
+## can be left empty
+Fragment: #dayone, ,
+
+# Constraints
+
+IF [Query string separator] = ""
+THEN [Query string parameter] = "";

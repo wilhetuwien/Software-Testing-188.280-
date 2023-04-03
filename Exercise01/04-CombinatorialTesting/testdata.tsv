@@ -1,0 +1,20 @@
+Schema	Subdomain	Domain	Top level domain	Port	Path	Query string separator	Query string parameter	Fragment
+http://	www.	example.	co.uk		/blog/article/search	?		
+ftp://		tuwien.	co.uk		/path/	?	docid=720&hl=en	
+http://		tuwien.	co.uk	:443	/path/			#dayone
+ftp://		example.	co.uk		/blog/article/search			#dayone
+http://		example.	co.uk		/	?	docid=720&hl=en	
+ftp://	www.	example.	co.uk	:443		?	docid=720&hl=en	#dayone
+http://	www.	example.	co.uk					
+ftp://		tuwien.	co.uk		/			
+ftp://		tuwien.	co.uk		/	?	docid=720&hl=en	
+http://		tuwien.	co.uk	:443				
+ftp://		tuwien.	co.uk			?	docid=720&hl=en	#dayone
+ftp://	www.	tuwien.	co.uk	:443	/			
+http://		tuwien.	co.uk			?	docid=720&hl=en	
+http://	www.	example.	co.uk		/path/			
+http://		tuwien.	co.uk	:443	/blog/article/search	?	docid=720&hl=en	
+http://		example.	co.uk	:443				
+http://	www.	tuwien.	co.uk					
+http://	www.	example.	co.uk	:443	/blog/article/search			
+http://	www.	tuwien.	co.uk	:443	/			#dayone
