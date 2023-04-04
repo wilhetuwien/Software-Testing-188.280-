@@ -25,3 +25,8 @@ Fragment: #dayone, ,
 
 IF [Query string separator] = ""
 THEN [Query string parameter] = "";
+
+
+
+##run command
+# pict-main/build/cli/pict url_model.txt > testdata.tsv

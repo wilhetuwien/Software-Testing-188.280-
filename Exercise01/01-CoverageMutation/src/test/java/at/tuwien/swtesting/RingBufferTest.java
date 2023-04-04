@@ -1,8 +1,14 @@
 /*
- * William Hedlund, 12233006, excercise 0
+ * William Hedlund, 12233006, excercise 1
+ * Have made changes from feedback:
+ * updated method names
+ * unrolled loops
+ * added @BeforeEach
+ * assertTrue, assertFalse
  */
 package at.tuwien.swtesting;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,107 +17,126 @@ import java.util.NoSuchElementException;
 
 public class RingBufferTest {
 	/* For creation of a standardized RingBuffer */
-	private int common_buffer_size = 5;
-	private RingBuffer<Integer> regularRingBuffer(){
-		RingBuffer<Integer> buffer = new RingBuffer<>(common_buffer_size);
-		return buffer;
+	private RingBuffer<Integer> buffer;
+	private int common_buffer_size = 2;
+
+	@BeforeEach
+	void init() {
+		buffer = new RingBuffer<>(common_buffer_size);
 	}
 
 	@Test
-	public void initializedCorrect(){
-		RingBuffer<Integer> buffer = regularRingBuffer();
+	public void capacity_is_set(){
 		assertEquals(common_buffer_size, buffer.capacity());
+	}
+
+	@Test
+	public void initial_size_set(){
 		assertEquals(0, buffer.size());
-		assertEquals(false, buffer.isFull());
-		assertEquals(true, buffer.isEmpty());
 	}
 
 	@Test
-	public void sizeOverflow(){
-		RingBuffer<Integer> buffer = regularRingBuffer();
-		int first_value = 0;
-		buffer.enqueue(Integer.valueOf(first_value));
-		int amount_of_overflow = 1;
-		for (int i=1; i < common_buffer_size + amount_of_overflow; i++){
-			buffer.enqueue(Integer.valueOf(i));
-		}
-		assertEquals(common_buffer_size, buffer.size());
-		assertEquals(true, buffer.isFull());
+	public void initialised_empty(){
+		assertTrue( buffer.isEmpty());
 	}
 
 	@Test
-	public void peekEmpty() {
-		RingBuffer<Integer> buffer = regularRingBuffer();
-		Exception exception = assertThrows(RuntimeException.class, () -> buffer.peek());
-		assertEquals("Empty ring buffer.", exception.getMessage());
-	}
-
-	@Test
-	public void dequeue() {
-		RingBuffer<Integer> buffer = regularRingBuffer();
+	public void is_not_empty_when_filled(){
 		buffer.enqueue(Integer.valueOf(0));
-	
-		assertEquals(Integer.valueOf(0), buffer.dequeue());
-		assertEquals(true, buffer.isEmpty(), "Item not dequeued correctly");
-
-		int amount_of_overflow = 2;
-		for (int i=0; i < common_buffer_size + amount_of_overflow; i++){
-			buffer.enqueue(Integer.valueOf(i));
-		}
-		for (int i=amount_of_overflow; i < common_buffer_size + amount_of_overflow; i++){
-			assertEquals(Integer.valueOf(i), buffer.dequeue(), "Dequeue return wrong item");
-		}
 		
-		Exception exception = assertThrows(RuntimeException.class, () -> buffer.dequeue());
+		assertFalse( buffer.isEmpty());
+	}
+
+	@Test
+	public void is_full_when_full(){
+		buffer.enqueue(Integer.valueOf(0));
+		buffer.enqueue(Integer.valueOf(1));
+
+		assertTrue( buffer.isFull());
+	}
+
+	@Test
+	public void is_not_full_when_not_full(){
+		assertFalse( buffer.isFull());
+	}
+
+	@Test
+	public void push_to_full_stack_does_not_overwrite_size(){
+		buffer.enqueue(Integer.valueOf(0));
+		buffer.enqueue(Integer.valueOf(1));
+		buffer.enqueue(Integer.valueOf(2));
+		
+		assertEquals(common_buffer_size, buffer.size());
+	}
+
+	@Test
+	public void peek_empty_buffer_assert_throws_error() {
+		Exception exception = assertThrows(RuntimeException.class, () -> buffer.peek());
+		
 		assertEquals("Empty ring buffer.", exception.getMessage());
 	}
 
 	@Test
-	public void overfillRingBuffer() {
-		RingBuffer<Integer> buffer = regularRingBuffer();
-		int first_value = 0;
-		buffer.enqueue(Integer.valueOf(first_value));
-		int amount_of_overflow = 1;
-		for (int i=1; i < common_buffer_size + amount_of_overflow; i++){
-			assertEquals(Integer.valueOf(0), buffer.peek(), "First value of buffer overwritten when not expected.");
-			buffer.enqueue(Integer.valueOf(i));
-		}
-		assertEquals(Integer.valueOf(amount_of_overflow), buffer.peek());
+	public void dequeue_removes_items_in_correct_order() {
+		buffer.enqueue(Integer.valueOf(0));
+		buffer.enqueue(Integer.valueOf(1));
+
+		assertEquals(Integer.valueOf(0), buffer.dequeue(), "Dequeue return wrong item");
+		assertEquals(Integer.valueOf(1), buffer.dequeue(), "Dequeue return wrong item");
+		assertTrue( buffer.isEmpty(), "Items not dequeued correctly");
 	}
 
 	@Test
-	public void iteratorHasNext() {
-		RingBuffer<Integer> buffer = regularRingBuffer();
+	public void dequeue_empty_buffer_assert_throws_error() {
+		Exception exception = assertThrows(RuntimeException.class, () -> buffer.dequeue());
+		
+		assertEquals("Empty ring buffer.", exception.getMessage());
+	}
+
+
+	@Test
+	public void enqueue_overwrites_oldest_value() {
+		buffer.enqueue(Integer.valueOf(0));
+		buffer.enqueue(Integer.valueOf(1));
+		buffer.enqueue(Integer.valueOf(2));
+
+		assertEquals(Integer.valueOf(1), buffer.peek());
+	}
+
+	@Test
+	public void iterator_hasNext_gives_same_result_if_no_other_action_is_taken() {
 		buffer.enqueue(Integer.valueOf(0));
 		Iterator<Integer> iterator = buffer.iterator();
-		int number_of_calls_in_a_row = 5;
-		for (int i = 0; i < number_of_calls_in_a_row; i++) {
-			assertEquals(true, iterator.hasNext(),".hasNext() is not expected to change result between calls");
-		}
+
+		assertTrue( iterator.hasNext(),".hasNext() initial call is supposed to be true");
+		assertTrue( iterator.hasNext(),".hasNext() is not expected to change result between calls");
 	}
 
 	@Test
-	public void iterateBuffer() {
-		RingBuffer<Integer> buffer = regularRingBuffer();
-		for (int i=0; i<common_buffer_size; i++){
-			buffer.enqueue(Integer.valueOf(i));
-		}
+	public void iterate_through_bufferring_does_not_change_buffer() {
+		buffer.enqueue(Integer.valueOf(0));
+		buffer.enqueue(Integer.valueOf(1));
 		Iterator<Integer> iterator = buffer.iterator();
-		for (int i=0; i<common_buffer_size; i++){
-			assertEquals(Integer.valueOf(i), iterator.next(), "Unexpected value from iterator.");
-		}
-		Iterator<Integer> iterator2 = buffer.iterator();
-		for (int i=0; i<common_buffer_size; i++){
-			assertEquals(Integer.valueOf(i), iterator2.next(), "The first and second iterator should behave the same.");
-		}
+
+		assertEquals(Integer.valueOf(0), iterator.next(), "Unexpected value from iterator.");
+		assertEquals(Integer.valueOf(1), iterator.next(), "Unexpected value from iterator.");
+		Iterator<Integer> iterator1 = buffer.iterator();
+		assertEquals(Integer.valueOf(0), iterator1.next(), "Unexpected value from iterator.");
+		assertEquals(Integer.valueOf(1), iterator1.next(), "Unexpected value from iterator.");
+	}
+
+	@Test
+	public void iterate_throws_error_when_no_next_item_when_buffer_is_empty() {
+		Iterator<Integer> iterator = buffer.iterator();
+
 		assertThrows(NoSuchElementException.class, () -> iterator.next());
 	}
 	
 	@Test
-	public void remove(){
-		RingBuffer<Integer> buffer = regularRingBuffer();
+	public void iterator_remove_throws_not_implemented(){
 		Iterator<Integer> iterator = buffer.iterator();
-		Exception exception = assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
+
+		assertThrows(UnsupportedOperationException.class, () -> iterator.remove());
 	}
 
 }
