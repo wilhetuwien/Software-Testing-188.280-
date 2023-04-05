@@ -10,7 +10,7 @@ public class RingBufferConstrTest {
     @Test
 	public void Valid_boundries_initialises(){
         new RingBuffer<>(0);
-        new RingBuffer<>(1000);
+        new RingBuffer<>(1000); //the greatest int is to big to allocate memory for
 	}
 
     @Test

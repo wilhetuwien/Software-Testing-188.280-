@@ -11,8 +11,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class RingBufferTest {
+public class RingBufferStateTest {
 	/* For creation of a standardized RingBuffer */
+	/*
+	 * 
+		State Transition Testing
+		#   Sequence
+		1   init(3) -empty- enqueue() -filled- dequeue() -empty-
+		2   init(3) -empty- enqueue() -filled- enqueue() -filled- dequeue() -filled-
+		3   init(3) -empty- enqueue() -filled- enqueue() -filled- enqueue() -full- dequeue() -filled-
+		4   init(3) -empty- enqueue() -filled- enqueue() -filled- enqueue() -full- enqueue() -full-
+		5   init(3) -empty- dequeue() -error-
+	 */
 	RingBuffer<Integer> buffer;
 	private int common_buffer_size = 3;
 
@@ -35,6 +45,7 @@ public class RingBufferTest {
 		return STATEFILLED; //filled
 	}
 
+	@Test
 	@DisplayName("init(3) -empty- enqueue() -filled- dequeue() -empty-")
 	public void seq1(){
 		// init(3) -empty- enqueue() -filled- dequeue() -empty-
@@ -47,6 +58,7 @@ public class RingBufferTest {
 		assertEquals(STATEEMPTY, getState(buffer));
 	}
 	
+	@Test
 	@DisplayName("init(3) -empty- enqueue() -filled- enqueue() -filled- dequeue() -filled-")
 	public void seq2(){
 		// init(3) -empty- enqueue() -filled- enqueue() -filled- dequeue() -filled-
@@ -62,6 +74,7 @@ public class RingBufferTest {
 		assertEquals(STATEFILLED, getState(buffer));
 	}
 	
+	@Test
 	@DisplayName("init(3) -empty- enqueue() -filled- enqueue() -filled- enqueue() -full- dequeue() -filled-")
 	public void seq3(){
 		// init(3) -empty- enqueue() -filled- enqueue() -filled- enqueue() -full- dequeue() -filled-
@@ -80,6 +93,7 @@ public class RingBufferTest {
 		assertEquals(STATEFILLED, getState(buffer));
 	}
 		
+	@Test
 	@DisplayName("init(3) -empty- enqueue() -filled- enqueue() -filled- enqueue() -full- enqueue() -full-")
 	public void seq4(){
 		// init(3) -empty- enqueue() -filled- enqueue() -filled- enqueue() -full- enqueue() -full-
@@ -97,7 +111,8 @@ public class RingBufferTest {
 		buffer.enqueue(3);
 		assertEquals(STATEFULL, getState(buffer));
 	}
-		
+	
+	@Test
 	@DisplayName("init(3) -empty- dequeue() -error-")
 	public void seq5(){
 		// init(3) -empty- dequeue() -error-

@@ -1,27 +1,82 @@
 # PICT model for testing URLs composed of different elements
 
+### some definitions ###
+# from https://www.rfc-editor.org/rfc/rfc3986
+# reserved    = gen-delims / sub-delims
+#      gen-delims  = ":" / "/" / "?" / "#" / "[" / "]" / "@"
+#
+#      sub-delims  = "!" / "$" / "&" / "'" / "(" / ")"
+#                  / "*" / "+" / "," / ";" / "="
+# unreserved  = ALPHA / DIGIT / "-" / "." / "_" / "~"
+# pct-encoded = "%" HEXDIG HEXDIG
+# pchar = unreserved / pct-encoded / sub-delims / ":" / "@"
+#      segment       = *pchar
+#      segment-nz    = 1*pchar
+#      segment-nz-nc = 1*( unreserved / pct-encoded / sub-delims / "@" )
+#                    ; non-zero-length segment without any colon ":"
+
+
+### elements begin ###
+
 ## Schema must end with :// 
+## must begin with a letter.
+## schema = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
 Schema: http://, ftp://
-## Host can be IPv4address or 
-## a registrated name that begins and ends 
-## with an aplhanumerical character. 
+
+
+
+
+## Host can be IPv4address
+##  IPv4address = dec-octet "." dec-octet "." dec-octet "." dec-octet
+## or a registrated name that begins and ends 
+## with an alphanumerical character. 
 ## Each domain label is seperated by ".".
-Subdomain: www., ,
-Domain: example., tuwien.
-Top level domain: co.uk
-## Port = ":*DIGIT". If no port then ":" should be omitted
+## reg-name    = *( unreserved / pct-encoded / sub-delims )
+Subdomain: www., ftp., 192.,
+Domain: example., tuwien., is., 0., !., A%25B., 
+Top level domain: co.uk, 2.16
+
+
+
+
+## Port = ":*DIGIT". 
+## If no port then ":" should be omitted
 Port: :443, ,
-## Path cannot begin with "//". It can be empty: "" or "/"
-Path: /blog/article/search, /path/, /, ,
+
+
+
+
+## Path cannot begin with double slash "//". It can be empty: "" or "/"
+#      path-abempty  = *( "/" segment )
+#      path-absolute = "/" [ segment-nz *( "/" segment ) ]
+#      path-noscheme = segment-nz-nc *( "/" segment )
+#      path-rootless = segment-nz *( "/" segment )
+#      path-empty    = 0<pchar>
+Path: /blog/article/search, /path, /, , :specification:docbook:dtd:xml:4.1.2, 
+
+
+
+
 ## Query. If query it should begin with "?" followed by one or more parameters seperated by "&"
 ## Else "?" should be omitted.
+# query       = *( pchar / "/" / "?" )
 Query string separator: ?, ,
 Query string parameter: docid=720&hl=en ,
+
+
+
+
 ## fragment begins with "#". The characters "/" and "?" are allowed in the fragment identifier
 ## can be left empty
+# fragment    = *( pchar / "/" / "?" )
 Fragment: #dayone, ,
 
+
+
+
 # Constraints
+
+
 
 IF [Query string separator] = ""
 THEN [Query string parameter] = "";

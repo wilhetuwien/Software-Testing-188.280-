@@ -1,1 +1,44 @@
-
+Schema	Subdomain	Domain	Top level domain	Port	Path	Query string separator	Query string parameter	Fragment
+ftp://	www.	!.	co.uk		/blog/article/search	?		#dayone
+http://	192.	is.	2.16		/path	?	docid=720&hl=en	
+http://	ftp.		co.uk	:443	/path			
+ftp://			2.16	:443	/blog/article/search	?	docid=720&hl=en	
+ftp://	ftp.	tuwien.	co.uk		/blog/article/search	?	docid=720&hl=en	
+http://		tuwien.	2.16		/			#dayone
+ftp://	192.	is.	co.uk		/blog/article/search			
+http://	www.	tuwien.	2.16					
+ftp://	www.	A%25B.	2.16	:443		?	docid=720&hl=en	#dayone
+ftp://	ftp.	!.	2.16		/path	?	docid=720&hl=en	#dayone
+http://	ftp.	tuwien.	co.uk	:443				
+ftp://	192.		co.uk		:specification:docbook:dtd:xml:4.1.2	?	docid=720&hl=en	#dayone
+ftp://		0.	co.uk	:443	/	?	docid=720&hl=en	
+http://	www.	example.	2.16		/blog/article/search			
+ftp://			2.16		/			
+http://	www.	is.	2.16	:443	:specification:docbook:dtd:xml:4.1.2			#dayone
+ftp://	192.	example.	co.uk			?	docid=720&hl=en	
+http://	192.	0.	2.16					
+http://		!.	2.16	:443		?	docid=720&hl=en	
+ftp://	ftp.	0.	co.uk	:443		?	docid=720&hl=en	#dayone
+http://	192.	!.	co.uk		/	?	docid=720&hl=en	
+http://		A%25B.	co.uk					
+http://	www.	A%25B.	2.16		/path			
+http://	192.	!.	2.16	:443		?	docid=720&hl=en	
+ftp://	192.	tuwien.	2.16		:specification:docbook:dtd:xml:4.1.2	?	docid=720&hl=en	
+http://	ftp.	is.	co.uk	:443		?		#dayone
+http://	ftp.	0.	2.16		:specification:docbook:dtd:xml:4.1.2			
+http://		is.	2.16					
+ftp://	ftp.	is.	2.16		/			#dayone
+ftp://		!.	2.16	:443	:specification:docbook:dtd:xml:4.1.2			#dayone
+ftp://	ftp.	A%25B.	2.16		/			#dayone
+http://		example.	co.uk	:443		?	docid=720&hl=en	#dayone
+ftp://	192.	A%25B.	2.16	:443	/blog/article/search	?	docid=720&hl=en	
+ftp://	ftp.	example.	2.16	:443	:specification:docbook:dtd:xml:4.1.2			
+http://		tuwien.	co.uk	:443	/path	?	docid=720&hl=en	
+ftp://	www.	example.	2.16		/			#dayone
+ftp://	www.	0.	2.16		/path	?	docid=720&hl=en	
+ftp://	www.		co.uk			?	docid=720&hl=en	#dayone
+ftp://	192.		co.uk	:443				
+ftp://	192.	example.	2.16		/path	?		
+ftp://	192.	0.	2.16		/blog/article/search	?	docid=720&hl=en	
+ftp://	ftp.	A%25B.	2.16		:specification:docbook:dtd:xml:4.1.2	?	docid=720&hl=en	
+ftp://	www.	!.	co.uk		:specification:docbook:dtd:xml:4.1.2			#dayone
