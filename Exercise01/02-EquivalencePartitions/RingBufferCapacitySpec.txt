@@ -13,8 +13,8 @@ Values outside these ranges throws compile time errors.
 (2) Refined Equivalence Partitions for Valid Partitions
 
 
-[0] -> Is both full and empty at the same time. Crash when enqueue.
-[1] -> Two states: full, empty. Allows enqueing.
-[2 .. 2147483647] -> Three states: empty, not empty and not full, full. Allows enqueing.
+[0] -> Is both full and empty at the same time. (Crash when enqueue.)
+[1] -> Two states: full, empty. (Allows enqueing.)
+[2 .. 2147483647] -> Three states: empty, filled, full. (Allows enqueing.)
 
 

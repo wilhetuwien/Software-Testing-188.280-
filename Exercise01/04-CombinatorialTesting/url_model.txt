@@ -31,9 +31,9 @@ Schema: http://, ftp://
 ## or a registrated name that begins and ends 
 ## with an alphanumerical character. 
 ## Each domain label is seperated by ".".
-## reg-name    = *( unreserved / pct-encoded / sub-delims )
+## In rfc1034 there is specified what is required for a domainname
 Subdomain: www., ftp., 192.,
-Domain: example., tuwien., is., 0., !., A%25B., 
+Domain: example., tuwien., is., 0., A1., a-a
 Top level domain: co.uk, 2.16
 
 
@@ -52,7 +52,7 @@ Port: :443, ,
 #      path-noscheme = segment-nz-nc *( "/" segment )
 #      path-rootless = segment-nz *( "/" segment )
 #      path-empty    = 0<pchar>
-Path: /blog/article/search, /path, /, , :specification:docbook:dtd:xml:4.1.2, 
+Path: /blog/article/search, /path, /, 
 
 
 
@@ -76,8 +76,15 @@ Fragment: #dayone, ,
 
 # Constraints
 
+# schema
+[Schema] 
+
+# IPv4address
+IF [Subdomain] = "192." OR [Domain] = "0." OR [Top level domain] = "2.16"
+THEN [Subdomain] = "192." AND [Domain] = "0." AND [Top level domain] = "2.16";
 
 
+# Query
 IF [Query string separator] = ""
 THEN [Query string parameter] = "";
 
