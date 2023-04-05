@@ -1,29 +1,27 @@
-Schema	Subdomain	Domain	Top level domain	Port	Path	Query string separator	Query string parameter	Fragment
-ftp://	www.	A1.	co.uk			?		#dayone
-http://		example.	co.uk	:443	/path	?	docid=720&hl=en	
-ftp://	ftp.	a-a	co.uk		/path			
-http://	ftp.	A1.	co.uk		/	?	docid=720&hl=en	
-http://		A1.	co.uk		/path	?	docid=720&hl=en	
-http://	www.	a-a	co.uk	:443	/blog/article/search	?	docid=720&hl=en	#dayone
-ftp://		tuwien.	co.uk		/blog/article/search			
-ftp://	192.	0.	2.16	:443		?	docid=720&hl=en	
-http://	192.	0.	2.16		/path			#dayone
-http://	www.	tuwien.	co.uk			?	docid=720&hl=en	
-http://	192.	0.	2.16		/			
-ftp://	www.	is.	co.uk	:443	/blog/article/search			
-ftp://	ftp.	a-a	co.uk			?	docid=720&hl=en	
-http://		is.	co.uk	:443	/	?	docid=720&hl=en	#dayone
-ftp://	ftp.	tuwien.	co.uk	:443	/			
-ftp://	ftp.	example.	co.uk		/blog/article/search			#dayone
-ftp://		tuwien.	co.uk		/path	?	docid=720&hl=en	#dayone
-ftp://	192.	0.	2.16		/blog/article/search			
-http://		tuwien.	co.uk					
-http://	www.	a-a	co.uk	:443	/	?	docid=720&hl=en	
-ftp://	www.	is.	co.uk					
-ftp://	www.	example.	co.uk					
-http://	ftp.	A1.	co.uk	:443	/blog/article/search			
-http://	www.	is.	co.uk		/path	?	docid=720&hl=en	
-http://	ftp.	is.	co.uk	:443	/path	?	docid=720&hl=en	#dayone
-http://		a-a	co.uk		/blog/article/search			#dayone
-ftp://		A1.	co.uk		/blog/article/search			
-ftp://	ftp.	example.	co.uk		/	?	docid=720&hl=en	#dayone
+Schema	Subdomain	Domain	Top level domain	Port	Path	Query string separator	Query string parameter	Fragment	Expected output
+ftp://	ftp.	tuwien.	co.uk	:443				#dayone	true
+http://	192.	0.	2.16		/	?	docid=720&hl=en		true
+http://	www.	a-a	co.uk		/blog/article/search				true
+ftp://		is.	co.uk		/	?	docid=720&hl=en	#dayone	true
+http://	www.	A1.	co.uk	:443		?	docid=720&hl=en		true
+ftp://		example.	co.uk		/blog/article/search				true
+ftp://	ftp.	a-a	co.uk	:443	/				true
+http://	ftp.	tuwien.	co.uk		/	?	docid=720&hl=en		true
+http://	ftp.	is.	co.uk	:443	/blog/article/search			#dayone	true
+ftp://	www.	tuwien.	co.uk		/blog/article/search	?	docid=720&hl=en		true
+http://		is.	co.uk						true
+ftp://	www.	tuwien.	co.uk		/path			#dayone	true
+http://		example.	co.uk	:443	/	?	docid=720&hl=en		true
+http://		a-a	co.uk			?	docid=720&hl=en	#dayone	true
+ftp://	192.	0.	2.16		/path				true
+http://	192.	0.	2.16	:443				#dayone	true
+http://	www.	a-a	co.uk	:443	/path	?	docid=720&hl=en		true
+http://	www.	is.	co.uk		/path				true
+ftp://	ftp.	A1.	co.uk		/path	?		#dayone	true
+ftp://	ftp.	example.	co.uk					#dayone	true
+ftp://		A1.	co.uk		/blog/article/search				true
+http://	www.	example.	co.uk		/path				true
+ftp://	192.	0.	2.16		/blog/article/search	?	docid=720&hl=en		true
+ftp://	www.	A1.	co.uk		/				true
+http://		a-a	co.uk		/path	?			true
+http://		tuwien.	co.uk		/path				true

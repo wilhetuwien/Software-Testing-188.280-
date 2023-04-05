@@ -8,6 +8,8 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 public class UrlValidatorTest {
     
     private UrlValidator sut = new UrlValidator();
@@ -15,9 +17,9 @@ public class UrlValidatorTest {
 	@ParameterizedTest
     @CsvFileSource(resources = "/testdata.tsv", delimiter = '\t', numLinesToSkip = 1)
 	public void valid_urls_are_valid(
-        String schema, String domain, String topDomain, 
+        String schema, String subdomain, String domain, String topDomain, 
         String port, String path, String querySeparator, 
-        String queryParameter, String fragment)
+        String queryParameter, String fragment, Boolean expectedOutput)
     {
         // (
         // schema , domain , topDomain ,
@@ -25,7 +27,7 @@ public class UrlValidatorTest {
         // queryParameter , fragment
         // ); 
         String[] parts = {
-            schema , domain , topDomain ,
+            schema , subdomain, domain , topDomain ,
             port , path , querySeparator ,
             queryParameter , fragment
             };
@@ -36,7 +38,7 @@ public class UrlValidatorTest {
             }
         };
 
-        assertTrue(sut.isValid(url));
-        // assertEquals(true, sut.isValid(url), "current urls: \n" + url + "\n");
+        //assertTrue(sut.isValid(url));
+        assertEquals(expectedOutput, sut.isValid(url), "current urls: \n" + url + "\n");
 	}
 }

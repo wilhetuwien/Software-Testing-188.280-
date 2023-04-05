@@ -71,13 +71,11 @@ Query string parameter: docid=720&hl=en ,
 # fragment    = *( pchar / "/" / "?" )
 Fragment: #dayone, ,
 
-
+# expected output
+Expected output: true
 
 
 # Constraints
-
-# schema
-[Schema] 
 
 # IPv4address
 IF [Subdomain] = "192." OR [Domain] = "0." OR [Top level domain] = "2.16"
