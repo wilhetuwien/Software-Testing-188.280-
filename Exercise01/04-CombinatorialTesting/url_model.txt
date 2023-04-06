@@ -21,7 +21,7 @@
 ## Schema must end with :// 
 ## must begin with a letter.
 ## schema = ALPHA *( ALPHA / DIGIT / "+" / "-" / "." )
-Schema: http://, ftp://
+Schema: http://, ftp://, file://
 
 
 
@@ -33,8 +33,8 @@ Schema: http://, ftp://
 ## Each domain label is seperated by ".".
 ## In rfc1034 there is specified what is required for a domainname
 Subdomain: www., ftp., 192.,
-Domain: example., tuwien., is., 0., A1., a-a
-Top level domain: co.uk, 2.16
+Domain: example., tuwien., is., 0., A1., a-a,
+Top level domain: co.uk, 2.16,
 
 
 
@@ -78,13 +78,48 @@ Expected output: true
 # Constraints
 
 # IPv4address
+# only IPv4 supports this format. Registered names cannot start with numbers
 IF [Subdomain] = "192." OR [Domain] = "0." OR [Top level domain] = "2.16"
 THEN [Subdomain] = "192." AND [Domain] = "0." AND [Top level domain] = "2.16";
 
+# Empty host / local file
+# out of this set of [schemas] only file:// supports no host
+# But in such case [path] is required
+IF [Subdomain] = ""
+AND [Domain] = "" 
+AND[Top level domain] = "" 
+AND [Port] = ""
+THEN
+[Schema] = "file://"
+AND [Path] <> "";
+
+
+
+# port not allowed in file://
+IF [Schema] = "file://"
+THEN [Port] = "";
+
+# port needs a host
+IF [Subdomain] = ""
+AND [Domain] = "" 
+AND[Top level domain] = "" 
+THEN
+[Port] = "";
+
+# HOST must end with alphanumerical char
+IF [Subdomain] <> ""
+OR [Domain] <> ""
+THEN
+[Top level domain] <> "";
 
 # Query
+# Query needs a query string separator
 IF [Query string separator] = ""
 THEN [Query string parameter] = "";
+
+# querys are not allowed for file://
+IF [Schema] = "file://"
+THEN [Query string separator] = "" AND [Query String parameter] = "" AND [Fragment] = "";
 
 
 

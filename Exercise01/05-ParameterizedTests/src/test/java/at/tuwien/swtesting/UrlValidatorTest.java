@@ -12,7 +12,8 @@ import javax.swing.text.StyledEditorKit.BoldAction;
 
 public class UrlValidatorTest {
     
-    private UrlValidator sut = new UrlValidator();
+    private String[] schemes = {"http","https","ftp","file"};
+    private UrlValidator sut = new UrlValidator(schemes);
 
 	@ParameterizedTest
     @CsvFileSource(resources = "/testdata.tsv", delimiter = '\t', numLinesToSkip = 1)
@@ -21,11 +22,6 @@ public class UrlValidatorTest {
         String port, String path, String querySeparator, 
         String queryParameter, String fragment, Boolean expectedOutput)
     {
-        // (
-        // schema , domain , topDomain ,
-        // port , path , querySeparator ,
-        // queryParameter , fragment
-        // ); 
         String[] parts = {
             schema , subdomain, domain , topDomain ,
             port , path , querySeparator ,
@@ -37,8 +33,6 @@ public class UrlValidatorTest {
                 url += s;
             }
         };
-
-        //assertTrue(sut.isValid(url));
-        assertEquals(expectedOutput, sut.isValid(url), "current urls: \n" + url + "\n");
+        assertEquals(expectedOutput, sut.isValid(url), "Failed url: \n" + url + "\n");
 	}
 }

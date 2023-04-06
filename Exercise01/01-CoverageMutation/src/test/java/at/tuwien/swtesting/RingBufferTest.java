@@ -69,7 +69,7 @@ public class RingBufferTest {
 	}
 
 	@Test
-	public void iterate_through_bufferring_does_not_change_buffer() {
+	public void iterate_through_buffer_ring_does_not_change_buffer() {
 		sut.enqueue(Integer.valueOf(0));
 		sut.enqueue(Integer.valueOf(1));
 		Iterator<Integer> iterator = sut.iterator();
