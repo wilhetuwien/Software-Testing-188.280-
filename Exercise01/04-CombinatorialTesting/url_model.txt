@@ -33,7 +33,7 @@ Schema: http://, ftp://, file://
 ## Each domain label is seperated by ".".
 ## In rfc1034 there is specified what is required for a domainname
 Subdomain: www., ftp., 192.,
-Domain: example., tuwien., is., 0., A1., a-a,
+Domain: example., tuwien., is., 0., A1., a-a.,
 Top level domain: co.uk, 2.16,
 
 

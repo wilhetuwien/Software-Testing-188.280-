@@ -1,3 +1,6 @@
+/*
+ * William Hedlund, 12233006, excercise 1
+ */
 package at.tuwien.swtesting;
 
 import java.util.Iterator;
@@ -62,6 +65,9 @@ public class RingBuffer<Item> implements Iterable<Item> {
 	 * @param item to be appended to the buffer.
 	 */
 	public void enqueue(Item item) {
+		if (a.length == 0){
+			throw new RuntimeException("Tried enqueueing to buffer with size 0.");
+		}
 		a[last] = item;
 		last = (last + 1) % a.length; // wrap-around
 		if (N < a.length) {

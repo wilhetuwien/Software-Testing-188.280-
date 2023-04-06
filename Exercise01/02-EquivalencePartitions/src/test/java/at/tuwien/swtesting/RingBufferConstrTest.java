@@ -1,5 +1,5 @@
 /*
- * William Hedlund, 12233006, excercise 0
+ * William Hedlund, 12233006, excercise 1
  */
 package at.tuwien.swtesting;
 
@@ -15,52 +15,62 @@ public class RingBufferConstrTest {
 
     @Test
 	public void capacity_zero_assert_is_empty_and_full(){
-        RingBuffer zero = new RingBuffer<>(0);
+        RingBuffer sut = new RingBuffer<>(0);
 
-		assertEquals(true, zero.isFull());
-		assertEquals(true, zero.isEmpty());
+		assertEquals(true, sut.isFull());
+		assertEquals(true, sut.isEmpty());
 	}
 
     @Test
+	public void capacity_zero_enqueue_assert_throws_error(){
+        RingBuffer sut = new RingBuffer<>(0);
+
+		Exception exception = assertThrows(RuntimeException.class, () -> sut.enqueue(Integer.valueOf(0)));
+		assertEquals("Tried enqueueing to buffer with size 0.", exception.getMessage());
+
+	}
+
+
+    @Test
 	public void capacity_one_is_empty(){
-        RingBuffer one = new RingBuffer<>(1);
-		assertEquals(false, one.isFull());
-		assertEquals(true, one.isEmpty());
+        RingBuffer sut = new RingBuffer<>(1);
+		assertEquals(false, sut.isFull());
+		assertEquals(true, sut.isEmpty());
 	}
 
     @Test
 	public void capacity_one_is_full(){
-        RingBuffer one = new RingBuffer<>(1);
-        one.enqueue(Integer.valueOf(0));
+        RingBuffer sut = new RingBuffer<>(1);
+        sut.enqueue(Integer.valueOf(0));
 
-		assertEquals(true, one.isFull());
-		assertEquals(false, one.isEmpty());
+		assertEquals(true, sut.isFull());
+		assertEquals(false, sut.isEmpty());
 
 	}
 
     @Test
 	public void other_capacity_is_empty(){
-        RingBuffer two = new RingBuffer<>(2);
-		assertEquals(false, two.isFull());
-		assertEquals(true, two.isEmpty());
+        RingBuffer sut = new RingBuffer<>(2);
+		assertEquals(false, sut.isFull());
+		assertEquals(true, sut.isEmpty());
 	}
 
     @Test
 	public void other_capacity_is_filled(){
-        RingBuffer two = new RingBuffer<>(2);
-        two.enqueue(Integer.valueOf(0));
+        RingBuffer sut = new RingBuffer<>(2);
+        sut.enqueue(Integer.valueOf(0));
 
-		assertEquals(false, two.isFull());
-		assertEquals(false, two.isEmpty());
+		assertEquals(false, sut.isFull());
+		assertEquals(false, sut.isEmpty());
 	}
 
     @Test
 	public void other_capacity_is_full(){
-        RingBuffer two = new RingBuffer<>(2);
-        two.enqueue(Integer.valueOf(0));
-        two.enqueue(Integer.valueOf(0));
+        RingBuffer sut = new RingBuffer<>(2);
+        sut.enqueue(Integer.valueOf(0));
+        sut.enqueue(Integer.valueOf(0));
 
-		assertEquals(true, two.isFull());
-		assertEquals(false, two.isEmpty());
+		assertEquals(true, sut.isFull());
+		assertEquals(false, sut.isEmpty());
 	}
 }
