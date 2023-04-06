@@ -52,7 +52,7 @@ Port: :443, ,
 #      path-noscheme = segment-nz-nc *( "/" segment )
 #      path-rootless = segment-nz *( "/" segment )
 #      path-empty    = 0<pchar>
-Path: /blog/article/search, /path, /, 
+Path: /blog/abs/path, /path, /, , /relative/l1/../path/, /./relativpath, /:special/, /@/, /!, /_, /~/,
 
 
 
@@ -61,7 +61,7 @@ Path: /blog/article/search, /path, /,
 ## Else "?" should be omitted.
 # query       = *( pchar / "/" / "?" )
 Query string separator: ?, ,
-Query string parameter: docid=720&hl=en ,
+Query string parameter: docid=720&hl=en , d=specia/a, d0?=apa, d=d:a,
 
 
 
@@ -69,7 +69,7 @@ Query string parameter: docid=720&hl=en ,
 ## fragment begins with "#". The characters "/" and "?" are allowed in the fragment identifier
 ## can be left empty
 # fragment    = *( pchar / "/" / "?" )
-Fragment: #dayone, ,
+Fragment: #dayone, , #specialsign?, #speical/sign, #special!sign,#speical:sign
 
 # expected output
 Expected output: true
@@ -111,6 +111,15 @@ IF [Subdomain] <> ""
 OR [Domain] <> ""
 THEN
 [Top level domain] <> "";
+
+
+#./r/rootless, :/noschema
+## path
+#IF [Subdomain] = ""
+#AND [Domain] = "" 
+#AND [Top level domain] = "" 
+#THEN
+#[path] 
 
 # Query
 # Query needs a query string separator

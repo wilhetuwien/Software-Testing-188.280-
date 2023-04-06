@@ -1,33 +1,98 @@
 Schema	Subdomain	Domain	Top level domain	Port	Path	Query string separator	Query string parameter	Fragment	Expected output
-http://		is.	co.uk		/path				true
-ftp://	www.	a-a	co.uk		/blog/article/search	?	docid=720&hl=en		true
-ftp://	ftp.	a-a	co.uk	:443	/path			#dayone	true
-http://	ftp.	example.	co.uk	:443		?	docid=720&hl=en		true
-file://	192.	0.	2.16		/				true
-ftp://			co.uk			?	docid=720&hl=en	#dayone	true
-http://	www.	A1.	co.uk		/	?	docid=720&hl=en		true
-file://	www.	tuwien.	co.uk						true
-http://		tuwien.	co.uk		/blog/article/search	?	docid=720&hl=en		true
-ftp://	192.	0.	2.16	:443		?	docid=720&hl=en		true
-http://	ftp.		co.uk		/			#dayone	true
-ftp://		example.	co.uk	:443	/				true
-ftp://	ftp.	A1.	co.uk					#dayone	true
-file://		a-a	co.uk		/				true
-http://	www.		co.uk		/path	?	docid=720&hl=en		true
-http://	192.	0.	2.16		/blog/article/search			#dayone	true
-ftp://	www.		co.uk	:443	/blog/article/search				true
-ftp://	ftp.	is.	co.uk			?	docid=720&hl=en		true
-ftp://		A1.	co.uk	:443	/path				true
-ftp://	www.	example.	co.uk		/path			#dayone	true
-ftp://	www.	is.	co.uk	:443	/			#dayone	true
-ftp://	ftp.	tuwien.	co.uk	:443	/path			#dayone	true
-http://	ftp.	is.	co.uk		/blog/article/search	?			true
-file://	ftp.	is.	co.uk		/path				true
-file://	www.	example.	co.uk		/blog/article/search				true
-file://					/path				true
-http://	www.	tuwien.	co.uk		/	?	docid=720&hl=en		true
-http://	192.	0.	2.16		/path				true
-file://					/blog/article/search				true
-file://	www.	A1.	co.uk		/blog/article/search				true
-http://	ftp.	a-a	co.uk					#dayone	true
+http://		tuwien.	co.uk		/:special/				true
+ftp://	ftp.	is.	co.uk		/!	?	d0?=apa	#dayone	true
+http://	www.		co.uk	:443	/@/	?	docid=720&hl=en	#specialsign?	true
+ftp://	www.	example.	co.uk		/./relativpath	?	d=specia/a	#special!sign	true
+ftp://		is.	co.uk	:443	/:special/	?	d=d:a	#speical:sign	true
+http://	192.	0.	2.16		/:special/	?	d=specia/a	#speical/sign	true
+http://	www.	a-a.	co.uk			?	d=d:a		true
+http://			co.uk		/!			#special!sign	true
+http://	ftp.	example.	co.uk	:443	/			#dayone	true
+ftp://	ftp.	tuwien.	co.uk		/_	?	d0?=apa	#specialsign?	true
+ftp://	192.	0.	2.16		/~/			#speical:sign	true
+ftp://	192.	0.	2.16	:443	/path	?	docid=720&hl=en		true
+ftp://	ftp.	tuwien.	co.uk		/./relativpath	?	docid=720&hl=en	#speical/sign	true
+http://	www.	A1.	co.uk	:443	/relative/l1/../path/	?	d0?=apa	#speical/sign	true
+http://		example.	co.uk		/path	?	d=d:a	#specialsign?	true
+http://	www.	tuwien.	co.uk		/	?	d=specia/a	#speical:sign	true
+ftp://	ftp.	a-a.	co.uk		/path	?	d=specia/a	#dayone	true
+http://	ftp.	example.	co.uk		/!	?	d=d:a	#speical/sign	true
+ftp://			co.uk			?	d0?=apa	#dayone	true
+ftp://		A1.	co.uk			?	docid=720&hl=en	#special!sign	true
+ftp://	192.	0.	2.16	:443		?	d0?=apa	#special!sign	true
+ftp://	192.	0.	2.16		/	?	d=d:a	#specialsign?	true
+file://	www.	is.	co.uk		/./relativpath				true
+http://		a-a.	co.uk	:443	/./relativpath			#specialsign?	true
+http://	ftp.	A1.	co.uk		/blog/abs/path	?	d=d:a	#dayone	true
+http://		a-a.	co.uk		/_			#speical/sign	true
+http://	www.	tuwien.	co.uk	:443	/!	?	docid=720&hl=en	#dayone	true
+http://	ftp.	is.	co.uk	:443	/~/	?	d=specia/a	#special!sign	true
+ftp://	ftp.	a-a.	co.uk		/relative/l1/../path/	?	docid=720&hl=en	#speical:sign	true
+http://	ftp.	A1.	co.uk	:443	/_	?	d=specia/a		true
+http://		tuwien.	co.uk		/relative/l1/../path/	?	d=d:a	#special!sign	true
+http://	ftp.	example.	co.uk			?	d0?=apa		true
+ftp://	ftp.		co.uk		/_	?	d=d:a	#speical:sign	true
+ftp://	ftp.	A1.	co.uk					#speical:sign	true
+ftp://	ftp.	A1.	co.uk		/@/			#dayone	true
+http://		is.	co.uk	:443		?	d=specia/a	#specialsign?	true
+http://	www.	a-a.	co.uk					#dayone	true
+ftp://	ftp.	tuwien.	co.uk			?	docid=720&hl=en	#specialsign?	true
+ftp://		is.	co.uk		/	?	docid=720&hl=en	#speical/sign	true
+http://	ftp.	a-a.	co.uk		/!	?	d0?=apa	#speical:sign	true
+ftp://	www.	example.	co.uk		/_	?	docid=720&hl=en	#dayone	true
+ftp://	192.	0.	2.16			?	d=d:a	#dayone	true
+http://	192.	0.	2.16		/./relativpath	?	d=d:a	#dayone	true
+ftp://		tuwien.	co.uk		/blog/abs/path			#specialsign?	true
+ftp://	ftp.	A1.	co.uk		/:special/	?	d0?=apa	#specialsign?	true
+http://	www.	is.	co.uk		/path			#speical/sign	true
+http://			co.uk		/relative/l1/../path/	?	d=specia/a		true
+http://	192.	0.	2.16		/!	?	d=specia/a		true
+ftp://		example.	co.uk		/~/	?	docid=720&hl=en		true
+http://	ftp.	tuwien.	co.uk					#speical:sign	true
+http://	192.	0.	2.16		/@/	?	d=d:a	#special!sign	true
+http://	www.		co.uk		/~/	?	d0?=apa	#speical/sign	true
+ftp://		example.	co.uk		/@/	?	d0?=apa	#speical:sign	true
+ftp://	www.	is.	co.uk	:443	/blog/abs/path	?	d=specia/a		true
+http://			co.uk		/./relativpath	?	d0?=apa	#speical:sign	true
+ftp://	ftp.	a-a.	co.uk		/	?	d0?=apa	#special!sign	true
+http://	www.		co.uk		/:special/	?	docid=720&hl=en	#special!sign	true
+ftp://		tuwien.	co.uk		/~/	?	d=d:a	#specialsign?	true
+ftp://		example.	co.uk		/blog/abs/path	?	d0?=apa	#special!sign	true
+ftp://	ftp.	example.	co.uk			?	d=specia/a	#speical/sign	true
+http://	192.	0.	2.16		/_			#special!sign	true
+http://	ftp.	is.	co.uk		/@/	?	d=specia/a		true
+ftp://		is.	co.uk		/relative/l1/../path/			#specialsign?	true
+ftp://	ftp.	tuwien.	co.uk		/@/			#speical/sign	true
+file://	ftp.	is.	co.uk						true
+http://			co.uk		/blog/abs/path	?	docid=720&hl=en	#speical/sign	true
+ftp://		A1.	co.uk		/~/			#dayone	true
+http://			co.uk		/path	?	d0?=apa	#speical:sign	true
 file://					/				true
+http://		A1.	co.uk		/./relativpath	?		#specialsign?	true
+ftp://		a-a.	co.uk		/~/	?	docid=720&hl=en	#specialsign?	true
+http://	www.		co.uk					#speical/sign	true
+http://		example.	co.uk		/:special/	?	docid=720&hl=en	#dayone	true
+file://					/@/				true
+http://	www.	a-a.	co.uk	:443	/:special/	?	d=d:a		true
+ftp://	192.	0.	2.16		/blog/abs/path	?	d0?=apa	#speical:sign	true
+ftp://	ftp.	A1.	co.uk		/!	?	d0?=apa	#specialsign?	true
+ftp://	192.	0.	2.16		/relative/l1/../path/	?	d0?=apa	#dayone	true
+file://					/_				true
+http://	www.	tuwien.	co.uk		/path			#special!sign	true
+file://					/path				true
+file://					/!				true
+ftp://	www.	A1.	co.uk		/path	?	d0?=apa	#dayone	true
+file://	192.	0.	2.16						true
+ftp://		example.	co.uk		/relative/l1/../path/	?	d0?=apa	#speical/sign	true
+file://					/:special/				true
+file://					/blog/abs/path				true
+http://		is.	co.uk		/_	?	d=d:a	#dayone	true
+file://	www.	tuwien.	co.uk		/relative/l1/../path/				true
+ftp://	www.	a-a.	co.uk	:443	/blog/abs/path			#dayone	true
+file://					/relative/l1/../path/				true
+file://	www.	example.	co.uk		/~/				true
+file://		A1.	co.uk		/				true
+file://					/./relativpath				true
+http://	ftp.	a-a.	co.uk		/@/	?	d0?=apa	#specialsign?	true
+file://					/~/				true
+file://	www.	a-a.	co.uk		/!				true
