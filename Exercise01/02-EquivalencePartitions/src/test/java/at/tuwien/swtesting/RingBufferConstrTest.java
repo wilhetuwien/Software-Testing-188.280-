@@ -10,7 +10,7 @@ public class RingBufferConstrTest {
     @Test
 	public void Valid_boundries_initialises(){
         new RingBuffer<>(0);
-        new RingBuffer<>(1000); //the greatest int is to big to allocate memory for
+        new RingBuffer<>(100000); //the greatest int is to big to allocate memory for
 	}
 
     @Test
@@ -23,6 +23,9 @@ public class RingBufferConstrTest {
 
     @Test
 	public void capacity_zero_enqueue_assert_throws_error(){
+		/*
+		 * exception thrown was added by William
+		 */
         RingBuffer sut = new RingBuffer<>(0);
 
 		Exception exception = assertThrows(RuntimeException.class, () -> sut.enqueue(Integer.valueOf(0)));

@@ -75,6 +75,7 @@ Fragment: #dayone, , #specialsign?, #speical/sign, #special!sign,#speical:sign
 Expected output: true
 
 
+
 # Constraints
 
 # IPv4address
@@ -111,15 +112,6 @@ IF [Subdomain] <> ""
 OR [Domain] <> ""
 THEN
 [Top level domain] <> "";
-
-
-#./r/rootless, :/noschema
-## path
-#IF [Subdomain] = ""
-#AND [Domain] = "" 
-#AND [Top level domain] = "" 
-#THEN
-#[path] 
 
 # Query
 # Query needs a query string separator

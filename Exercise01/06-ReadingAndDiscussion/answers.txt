@@ -1,0 +1,21 @@
+1.
+Two developers spent two years developing unit tests for 25000 lines of code.
+Assuming that a a year of work is 260 days and a day is 8 hours, 
+2*(2*8*260), that results in 8320 hours of work.
+
+This is a lot of work and probably doesn't include all the effort for developing testable code (as mentioned later in the paper 'Develop a Proper Strategy to Maximize Coverage').
+But i think it is a reasonable effort to put in depending on the potential consequences of and error such as the loss of human life or the loss of expensive instruments.
+
+2.
+Pareto principle is the idea that the first 80% of code coverage is easy to achieve while the remaining is not.
+This could be because in the beginning the focus is on the easy to reach cases and therefore more difficult things are postponed until the very end.
+
+This principle is partly applicable to the project described in the paper. The difficulties seems to be encountered at around 95% test coverage.
+But in the paper it is pointed out the the metric used might have influeced the perception of the progress being made and optimisation for a specific metric might have hidden downsides.
+
+It would have been insteresting to have a discussion and compare other metrics during the project.
+
+
+3.
+As an online shop is not software that may lead to the death of people a test coverage around 80% i think is accetable.
+T

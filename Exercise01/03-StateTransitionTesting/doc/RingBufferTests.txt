@@ -1,0 +1,7 @@
+		State Transition Testing
+		#   Sequence
+		1   init(3) -empty- enqueue() -filled- dequeue() -empty-
+		2   init(3) -empty- enqueue() -filled- enqueue() -filled- dequeue() -filled-
+		3   init(3) -empty- enqueue() -filled- enqueue() -filled- enqueue() -full- dequeue() -filled-
+		4   init(3) -empty- enqueue() -filled- enqueue() -filled- enqueue() -full- enqueue() -full-
+		5   init(3) -empty- dequeue() -error-

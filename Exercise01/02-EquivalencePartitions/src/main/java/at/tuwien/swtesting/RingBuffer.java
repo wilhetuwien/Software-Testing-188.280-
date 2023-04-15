@@ -66,6 +66,9 @@ public class RingBuffer<Item> implements Iterable<Item> {
 	 */
 	public void enqueue(Item item) {
 		if (a.length == 0){
+			/*
+			 * added by William
+			 */
 			throw new RuntimeException("Tried enqueueing to buffer with size 0.");
 		}
 		a[last] = item;

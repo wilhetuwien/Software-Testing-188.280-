@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class RingBufferStateTest {
-	/* For creation of a standardized RingBuffer */
 	/*
 	 * 
 		State Transition Testing
