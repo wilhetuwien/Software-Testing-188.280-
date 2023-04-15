@@ -17,5 +17,5 @@ It would have been insteresting to have a discussion and compare other metrics d
 
 
 3.
-As an online shop is not software that may lead to the death of people a test coverage around 80% i think is accetable.
-T
+As an online shop is not software that may lead to the death of people a test coverage around 60% i think is accetable.
+The tests should cover commonly used functions used by the user and vital parts of the system like payment processing.

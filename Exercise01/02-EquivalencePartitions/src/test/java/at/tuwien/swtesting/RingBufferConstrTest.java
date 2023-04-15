@@ -1,5 +1,5 @@
 /*
- * William Hedlund, 12233006, excercise 1
+ * William Hedlund, 12233006, excercise 1,2
  */
 package at.tuwien.swtesting;
 

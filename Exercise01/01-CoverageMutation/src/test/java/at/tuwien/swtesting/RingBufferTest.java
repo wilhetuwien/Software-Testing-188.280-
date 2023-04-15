@@ -1,5 +1,5 @@
 /*
- * William Hedlund, 12233006, excercise 1
+ * William Hedlund, 12233006, excercise 1,1
  * Have made changes from feedback:
  * updated method names
  * unrolled loops
