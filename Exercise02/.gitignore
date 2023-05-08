@@ -1,0 +1,28 @@
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+
+
+turnkey-bugzilla-16.1-buster-amd64.ova
+document/

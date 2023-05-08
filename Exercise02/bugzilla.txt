@@ -1,0 +1,9 @@
+Rootcode: Bugzilla1
+admin@test.se, Bugzilla1
+bugzilla@test.se, 
+
+
+root
+Bugzilla1
+
+http://192.168.8.253/

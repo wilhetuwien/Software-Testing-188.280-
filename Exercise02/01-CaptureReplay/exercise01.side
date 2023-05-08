@@ -1,0 +1,556 @@
+{
+  "id": "03f9281d-80ea-4faf-86b3-d8aec56ede37",
+  "version": "2.0",
+  "name": "exercise01",
+  "url": "http://192.168.56.101/",
+  "tests": [{
+    "id": "76502be7-80fe-4e38-80c9-fd83bb98e7bd",
+    "name": "SearchTest",
+    "commands": [{
+      "id": "51a14b78-d306-44a1-908a-ea63707134ee",
+      "comment": "",
+      "command": "open",
+      "target": "http://192.168.56.101/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1a460671-c784-4f9c-a70f-aee75e8b4954",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "550x694",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "afdb746b-3825-4ad3-b5f9-0c6a455be267",
+      "comment": "",
+      "command": "click",
+      "target": "id=query",
+      "targets": [
+        ["id=query", "id"],
+        ["css=#query", "css:finder"],
+        ["xpath=//a[@id='query']", "xpath:attributes"],
+        ["xpath=//div[@id='page-index']/div[2]/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, 'query.cgi')])[2]", "xpath:href"],
+        ["xpath=//div[2]/ul/li[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9a1c1e70-9647-408f-abf3-82bbad41d1e9",
+      "comment": "",
+      "command": "click",
+      "target": "id=bug_status",
+      "targets": [
+        ["id=bug_status", "id"],
+        ["name=bug_status", "name"],
+        ["css=#bug_status", "css:finder"],
+        ["xpath=//select[@id='bug_status']", "xpath:attributes"],
+        ["xpath=//div[@id='bugzilla-body']/div/div/form/table/tbody/tr/td/select", "xpath:idRelative"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b4b74152-d678-4fc8-ad28-3b09c6e3585a",
+      "comment": "",
+      "command": "select",
+      "target": "id=bug_status",
+      "targets": [],
+      "value": "label=All"
+    }, {
+      "id": "2997295e-3eb1-46e1-81fa-1f78088023ff",
+      "comment": "",
+      "command": "click",
+      "target": "css=option:nth-child(3)",
+      "targets": [
+        ["css=option:nth-child(3)", "css:finder"],
+        ["xpath=//option[@value='__all__']", "xpath:attributes"],
+        ["xpath=//select[@id='bug_status']/option[3]", "xpath:idRelative"],
+        ["xpath=//option[3]", "xpath:position"],
+        ["xpath=//option[contains(.,'All\n          ')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "49d58351-9b58-402d-8411-d1dc088e2304",
+      "comment": "",
+      "command": "click",
+      "target": "id=product",
+      "targets": [
+        ["id=product", "id"],
+        ["name=product", "name"],
+        ["css=#product", "css:finder"],
+        ["xpath=//select[@id='product']", "xpath:attributes"],
+        ["xpath=//div[@id='bugzilla-body']/div/div/form/table/tbody/tr[2]/td/select", "xpath:idRelative"],
+        ["xpath=//tr[2]/td/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "afe8b73f-55e9-4588-b47d-fbe12b446f0e",
+      "comment": "",
+      "command": "select",
+      "target": "id=product",
+      "targets": [],
+      "value": "label=TestProduct"
+    }, {
+      "id": "f37ace30-e6b3-4637-b58a-e0cde6f9600c",
+      "comment": "",
+      "command": "click",
+      "target": "css=#product > option:nth-child(2)",
+      "targets": [
+        ["css=#product > option:nth-child(2)", "css:finder"],
+        ["xpath=//option[@value='TestProduct']", "xpath:attributes"],
+        ["xpath=//select[@id='product']/option[2]", "xpath:idRelative"],
+        ["xpath=//tr[2]/td/select/option[2]", "xpath:position"],
+        ["xpath=//option[contains(.,'TestProduct\n        ')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1b5ef782-d3d1-45fb-9b9e-29f07e1a9816",
+      "comment": "",
+      "command": "click",
+      "target": "id=content",
+      "targets": [
+        ["id=content", "id"],
+        ["name=content", "name"],
+        ["css=#content", "css:finder"],
+        ["xpath=//input[@id='content']", "xpath:attributes"],
+        ["xpath=//div[@id='bugzilla-body']/div/div/form/table/tbody/tr[3]/td/input", "xpath:idRelative"],
+        ["xpath=//td/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8ee21f4d-a221-4acc-a1b7-a101caed97ae",
+      "comment": "",
+      "command": "type",
+      "target": "id=content",
+      "targets": [
+        ["id=content", "id"],
+        ["name=content", "name"],
+        ["css=#content", "css:finder"],
+        ["xpath=//input[@id='content']", "xpath:attributes"],
+        ["xpath=//div[@id='bugzilla-body']/div/div/form/table/tbody/tr[3]/td/input", "xpath:idRelative"],
+        ["xpath=//td/input", "xpath:position"]
+      ],
+      "value": "for search test"
+    }, {
+      "id": "e81c2b30-ce3f-437f-9f75-c6d7fe2f81b0",
+      "comment": "",
+      "command": "click",
+      "target": "id=search",
+      "targets": [
+        ["id=search", "id"],
+        ["css=#search", "css:finder"],
+        ["xpath=//input[@id='search']", "xpath:attributes"],
+        ["xpath=//div[@id='bugzilla-body']/div/div/form/table/tbody/tr[4]/td[2]/input", "xpath:idRelative"],
+        ["xpath=//td[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ec2e5a40-1d46-4990-9232-b56900404cf0",
+      "comment": "",
+      "command": "verifyText",
+      "target": "css=.bz_result_count",
+      "targets": [
+        ["css=.bz_result_count", "css:finder"],
+        ["xpath=//div[@id='bugzilla-body']/span", "xpath:idRelative"],
+        ["xpath=//body/div[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'2 bugs found.')]", "xpath:innerText"]
+      ],
+      "value": "2 bugs found."
+    }]
+  }, {
+    "id": "6b665c3e-83e0-43ab-87f8-1faff066760d",
+    "name": "CreateBugTest",
+    "commands": [{
+      "id": "07471c54-4904-463f-bf4e-5f2c97413845",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "48307cb1-d5c8-4c89-a1aa-f761b4275479",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "550x692",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e6e23099-2db7-4e51-a004-a125fed7c5b6",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=New",
+      "targets": [
+        ["linkText=New", "linkText"],
+        ["css=#common_links li:nth-child(2) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'New')]", "xpath:link"],
+        ["xpath=//div[@id='common_links']/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'enter_bug.cgi')]", "xpath:href"],
+        ["xpath=//li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'New')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b5a2b89c-691d-4e6f-b75b-ca572b09b72c",
+      "comment": "",
+      "command": "click",
+      "target": "id=short_desc",
+      "targets": [
+        ["id=short_desc", "id"],
+        ["name=short_desc", "name"],
+        ["css=#short_desc", "css:finder"],
+        ["xpath=//input[@id='short_desc']", "xpath:attributes"],
+        ["xpath=//form[@id='Create']/table/tbody[5]/tr/td/input", "xpath:idRelative"],
+        ["xpath=//tbody[5]/tr/td/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6b80d616-e235-4a8d-bc27-e2d38daedf97",
+      "comment": "",
+      "command": "type",
+      "target": "id=short_desc",
+      "targets": [
+        ["id=short_desc", "id"],
+        ["name=short_desc", "name"],
+        ["css=#short_desc", "css:finder"],
+        ["xpath=//input[@id='short_desc']", "xpath:attributes"],
+        ["xpath=//form[@id='Create']/table/tbody[5]/tr/td/input", "xpath:idRelative"],
+        ["xpath=//tbody[5]/tr/td/input", "xpath:position"]
+      ],
+      "value": "Summary"
+    }, {
+      "id": "e80e6027-bd25-4bbc-948c-6a88e7a754b9",
+      "comment": "",
+      "command": "type",
+      "target": "id=comment",
+      "targets": [
+        ["id=comment", "id"],
+        ["name=comment", "name"],
+        ["css=#comment", "css:finder"],
+        ["xpath=//textarea[@id='comment']", "xpath:attributes"],
+        ["xpath=//form[@id='Create']/table/tbody[5]/tr[3]/td/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Description"
+    }, {
+      "id": "ae8937ec-7813-4ad6-be5f-7b5d8c22e734",
+      "comment": "",
+      "command": "verifyValue",
+      "target": "id=short_desc",
+      "targets": [
+        ["id=short_desc", "id"],
+        ["name=short_desc", "name"],
+        ["css=#short_desc", "css:finder"],
+        ["xpath=//input[@id='short_desc']", "xpath:attributes"],
+        ["xpath=//form[@id='Create']/table/tbody[5]/tr/td/input", "xpath:idRelative"],
+        ["xpath=//tbody[5]/tr/td/input", "xpath:position"]
+      ],
+      "value": "Summary"
+    }, {
+      "id": "4f8f27b4-e570-48a3-ad32-a5246efd902c",
+      "comment": "",
+      "command": "verifyValue",
+      "target": "id=comment",
+      "targets": [
+        ["id=comment", "id"],
+        ["name=comment", "name"],
+        ["css=#comment", "css:finder"],
+        ["xpath=//textarea[@id='comment']", "xpath:attributes"],
+        ["xpath=//form[@id='Create']/table/tbody[5]/tr[3]/td/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Description"
+    }, {
+      "id": "cafcbf91-c861-4fbe-9ba0-f7c4181d1ad0",
+      "comment": "",
+      "command": "click",
+      "target": "id=commit",
+      "targets": [
+        ["id=commit", "id"],
+        ["css=#commit", "css:finder"],
+        ["xpath=//input[@id='commit']", "xpath:attributes"],
+        ["xpath=//form[@id='Create']/table/tbody[8]/tr/td/input", "xpath:idRelative"],
+        ["xpath=//tbody[8]/tr/td/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "396b3b02-b74e-44b9-b5b2-76cfe4680e67",
+      "comment": "Verify element indicateing that bug has been created exists",
+      "command": "assertElementPresent",
+      "target": "css=#bugzilla-body > dl > dt",
+      "targets": [
+        ["css=#bugzilla-body > dl > dt", "css:finder"],
+        ["xpath=//div[@id='bugzilla-body']/dl/dt", "xpath:idRelative"],
+        ["xpath=//dt", "xpath:position"],
+        ["xpath=//dt[contains(.,'Bug 3 has been successfully created')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "6451976b-d2b9-47bd-9aa4-f15599fd521d",
+    "name": "ChangeStatusTest",
+    "commands": [{
+      "id": "54eacf03-f9c8-47ac-a196-ee08bbcedf76",
+      "comment": "",
+      "command": "open",
+      "target": "http://192.168.56.101/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4997ace1-3dce-4c99-aeed-5a56803d779e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "550x694",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c2db015d-13f8-4a71-a3c5-413098a43fd3",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Browse",
+      "targets": [
+        ["linkText=Browse", "linkText"],
+        ["css=#common_links li:nth-child(3) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Browse')]", "xpath:link"],
+        ["xpath=//div[@id='common_links']/ul/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'describecomponents.cgi')]", "xpath:href"],
+        ["xpath=//li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Browse')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7269a7d7-137b-4229-8977-5b8d88f563e4",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=TestComponent",
+      "targets": [
+        ["linkText=TestComponent", "linkText"],
+        ["css=.component_name > a", "css:finder"],
+        ["xpath=//a[contains(text(),'TestComponent')]", "xpath:link"],
+        ["xpath=//tr[@id='TestComponent']/td/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'buglist.cgi?product=TestProduct&component=TestComponent&resolution=---')]", "xpath:href"],
+        ["xpath=//td/a", "xpath:position"],
+        ["xpath=//a[contains(.,'TestComponent')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c808254c-912d-4b33-9178-5fb2e1108c4c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=2",
+      "targets": [
+        ["linkText=2", "linkText"],
+        ["css=#b2 > .first-child > a", "css:finder"],
+        ["xpath=//a[contains(text(),'2')]", "xpath:link"],
+        ["xpath=//tr[@id='b2']/td/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'show_bug.cgi?id=2')]", "xpath:href"],
+        ["xpath=//td/a", "xpath:position"],
+        ["xpath=//a[contains(.,'2')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "49c3e2a4-8c06-4331-aaf1-e2ad917aab87",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Clone This Bug",
+      "targets": [
+        ["linkText=Clone This Bug", "linkText"],
+        ["css=li:nth-child(3) > a:nth-child(1)", "css:finder"],
+        ["xpath=//a[contains(text(),'Clone This Bug')]", "xpath:link"],
+        ["xpath=//div[@id='bugzilla-body']/ul/li[3]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'enter_bug.cgi?cloned_bug_id=2')]", "xpath:href"],
+        ["xpath=//div[2]/ul/li[3]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Clone This Bug')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e5bd6191-167e-41fb-9b38-215b33e499bb",
+      "comment": "",
+      "command": "click",
+      "target": "id=commit",
+      "targets": [
+        ["id=commit", "id"],
+        ["css=#commit", "css:finder"],
+        ["xpath=//input[@id='commit']", "xpath:attributes"],
+        ["xpath=//form[@id='Create']/table/tbody[8]/tr/td/input", "xpath:idRelative"],
+        ["xpath=//tbody[8]/tr/td/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8e855d29-c904-4ff7-ab30-4d2a9809d1df",
+      "comment": "",
+      "command": "click",
+      "target": "id=bug_status",
+      "targets": [
+        ["id=bug_status", "id"],
+        ["name=bug_status", "name"],
+        ["css=#bug_status", "css:finder"],
+        ["xpath=//select[@id='bug_status']", "xpath:attributes"],
+        ["xpath=//div[@id='status']/select", "xpath:idRelative"],
+        ["xpath=//div/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8aacb021-977a-4a97-99c8-7249521fd1e9",
+      "comment": "",
+      "command": "select",
+      "target": "id=resolution",
+      "targets": [],
+      "value": "label=FIXED"
+    }, {
+      "id": "828cb407-4f6f-472e-a7b9-ffde204ab6ab",
+      "comment": "",
+      "command": "select",
+      "target": "id=bug_status",
+      "targets": [],
+      "value": "label=RESOLVED"
+    }, {
+      "id": "219a17bf-5edf-4c01-aefb-26e6af391e9d",
+      "comment": "",
+      "command": "click",
+      "target": "id=v4_bug_status",
+      "targets": [
+        ["id=v4_bug_status", "id"],
+        ["css=#v4_bug_status", "css:finder"],
+        ["xpath=//option[@id='v4_bug_status']", "xpath:attributes"],
+        ["xpath=//select[@id='bug_status']/option[3]", "xpath:idRelative"],
+        ["xpath=//div/select/option[3]", "xpath:position"],
+        ["xpath=//option[contains(.,'RESOLVED')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "71f521a8-f25c-451f-b67e-5b330e34eec3",
+      "comment": "",
+      "command": "click",
+      "target": "id=resolution",
+      "targets": [
+        ["id=resolution", "id"],
+        ["name=resolution", "name"],
+        ["css=#resolution", "css:finder"],
+        ["xpath=//select[@id='resolution']", "xpath:attributes"],
+        ["xpath=//span[@id='resolution_settings']/select", "xpath:idRelative"],
+        ["xpath=//span/select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0953ad88-2b4e-412d-851c-c6455ea8e3f1",
+      "comment": "",
+      "command": "click",
+      "target": "id=v2_resolution",
+      "targets": [
+        ["id=v2_resolution", "id"],
+        ["css=#v2_resolution", "css:finder"],
+        ["xpath=//option[@id='v2_resolution']", "xpath:attributes"],
+        ["xpath=//select[@id='resolution']/option", "xpath:idRelative"],
+        ["xpath=//span/select/option", "xpath:position"],
+        ["xpath=//option[contains(.,'FIXED')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fa9ce45e-8f30-47a2-81be-44f40c6a6a3a",
+      "comment": "",
+      "command": "click",
+      "target": "id=comment",
+      "targets": [
+        ["id=comment", "id"],
+        ["name=comment", "name"],
+        ["css=#comment", "css:finder"],
+        ["xpath=//textarea[@id='comment']", "xpath:attributes"],
+        ["xpath=//div[@id='add_comment']/table/tbody/tr/td/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3c50e0a4-7a17-4f4c-b198-f2e70e48f4ad",
+      "comment": "",
+      "command": "click",
+      "target": "id=comment",
+      "targets": [
+        ["id=comment", "id"],
+        ["name=comment", "name"],
+        ["css=#comment", "css:finder"],
+        ["xpath=//textarea[@id='comment']", "xpath:attributes"],
+        ["xpath=//div[@id='add_comment']/table/tbody/tr/td/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "71a66668-bf14-47e3-b5d7-92a2623abeeb",
+      "comment": "",
+      "command": "type",
+      "target": "id=comment",
+      "targets": [
+        ["id=comment", "id"],
+        ["name=comment", "name"],
+        ["css=#comment", "css:finder"],
+        ["xpath=//textarea[@id='comment']", "xpath:attributes"],
+        ["xpath=//div[@id='add_comment']/table/tbody/tr/td/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "My new bug with status"
+    }, {
+      "id": "977c7db4-2fab-4609-ae2c-9d18dfcff7a8",
+      "comment": "",
+      "command": "click",
+      "target": "id=commit",
+      "targets": [
+        ["id=commit", "id"],
+        ["css=#commit", "css:finder"],
+        ["xpath=//input[@id='commit']", "xpath:attributes"],
+        ["xpath=//div[@id='add_comment']/table/tbody/tr/td/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b2aa897c-92ce-4686-9ec8-d0805714b2ea",
+      "comment": "",
+      "command": "click",
+      "target": "css=dl:nth-child(1) .bz_bug_link",
+      "targets": [
+        ["linkText=20", "linkText"],
+        ["css=dl:nth-child(1) .bz_bug_link", "css:finder"],
+        ["xpath=//a[contains(text(),'20')]", "xpath:link"],
+        ["xpath=//div[@id='bugzilla-body']/dl/dt/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'show_bug.cgi?id=20')]", "xpath:href"],
+        ["xpath=//dt/a", "xpath:position"],
+        ["xpath=//a[contains(.,'20')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bb3c32a2-4a0f-41e1-a66a-9a7508c8a615",
+      "comment": "",
+      "command": "verifyText",
+      "target": "id=static_bug_status",
+      "targets": [
+        ["id=static_bug_status", "id"],
+        ["css=#static_bug_status", "css:finder"],
+        ["xpath=//span[@id='static_bug_status']", "xpath:attributes"],
+        ["xpath=//td[@id='bz_field_status']/span", "xpath:idRelative"],
+        ["xpath=//td/span", "xpath:position"]
+      ],
+      "value": "RESOLVED FIXED (edit)"
+    }, {
+      "id": "3819952d-9820-4683-a050-de14fa087f02",
+      "comment": "",
+      "command": "verifyText",
+      "target": "id=comment_text_1",
+      "targets": [
+        ["id=comment_text_1", "id"],
+        ["css=#comment_text_1", "css:finder"],
+        ["xpath=//pre[@id='comment_text_1']", "xpath:attributes"],
+        ["xpath=//div[@id='c1']/pre", "xpath:idRelative"],
+        ["xpath=//div[2]/table/tbody/tr/td/div[2]/pre", "xpath:position"],
+        ["xpath=//pre[contains(.,'My new bug with status')]", "xpath:innerText"]
+      ],
+      "value": "My new bug with status"
+    }]
+  }],
+  "suites": [{
+    "id": "18858966-a4f9-4f69-ae7a-877879e94934",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["76502be7-80fe-4e38-80c9-fd83bb98e7bd"]
+  }],
+  "urls": ["http://192.168.8.253/", "http://192.168.56.101/"],
+  "plugins": []
+}
