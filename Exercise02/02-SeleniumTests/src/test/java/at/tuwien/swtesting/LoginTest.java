@@ -16,9 +16,9 @@ import io.github.bonigarcia.wdm.config.DriverManagerType;
 
 public class LoginTest {
 
-	private static final String BASE_URL = "http://192.168.174.128/";
+	private static final String BASE_URL = "http://192.168.56.101/";
 	private static final String USERNAME = "admin@example.com";
-	private static final String PASSWORD = "Test1234";
+	private static final String PASSWORD = "Bugzilla1";
 	
 	private static final DriverManagerType DRIVER_TYPE = DriverManagerType.CHROME;
 
