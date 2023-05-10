@@ -7,16 +7,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Sleeper;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import org.openqa.selenium.support.ui.Select;
 
@@ -24,14 +16,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.Keys;
 import java.util.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class CreateBugTest {
-  private static Map<String, Object> vars;
   static JavascriptExecutor js;
 
 	private static final String BASE_URL = "http://192.168.56.101/";
@@ -47,12 +34,8 @@ public class CreateBugTest {
 		WebDriverManager.getInstance(DRIVER_TYPE).setup();
     driver = new ChromeDriver();
     js = (JavascriptExecutor) driver;
-    vars = new HashMap<String, Object>();
 
 		driver.get(BASE_URL);
-
-		assertFalse(isElementPresent(By.linkText("Log out")));
-
 		driver.get(BASE_URL + "index.cgi?GoAheadAndLogIn=1");
 
 		// on login page ...
@@ -83,59 +66,79 @@ public class CreateBugTest {
     // Test name: CreateBugTest
     // Step # | name | target | value
     // 1 | open | / | 
-    driver.get("http://192.168.56.101/");
-    // 2 | setWindowSize | 550x692 | 
-    // driver.manage().window().setSize(new Dimension(550, 692));
-    // 3 | click | linkText=New | 
+    driver.get(BASE_URL);
+    // 2 | click | linkText=New | 
     driver.findElement(By.linkText("New")).click();
-    // 4 | click | id=short_desc | 
+    // 3 | click | id=short_desc | 
     driver.findElement(By.id("short_desc")).click();
-    // 5 | type | id=short_desc | Summary
-    driver.findElement(By.id("short_desc")).sendKeys("Summary");
-    // 6 | type | id=comment | Description
-    driver.findElement(By.id("comment")).sendKeys("Description");
-    // 7 | verifyValue | id=short_desc | Summary
-    {
-      String value = driver.findElement(By.id("short_desc")).getAttribute("value");
-      assertEquals(value, "Summary");
-    }
-    // 8 | verifyValue | id=comment | Description
-    {
-      String value = driver.findElement(By.id("comment")).getAttribute("value");
-      assertEquals(value, "Description");
-    }
-    // 9 | click | id=commit | 
+    // 4 | type | id=short_desc | TestCreateBug
+    driver.findElement(By.id("short_desc")).sendKeys("TestCreateBug");
+    // 5 | click | id=comment | 
+    driver.findElement(By.id("comment")).click();
+    // 6 | type | id=comment | A simple test for creating a bugreport
+    driver.findElement(By.id("comment")).sendKeys("A simple test for creating a bugreport");
+    // 7 | click | id=commit | 
     driver.findElement(By.id("commit")).click();
-    // 10 | assertElementPresent | css=#bugzilla-body > dl > dt | 
-    // Verify element indicateing that bug has been created exists
+    // 8 | assertElementPresent | xpath=//*[@id="bugzilla-body"]/dl/dt[starts-with(text(),'Bug ') and contains(text()[2], " has been successfully created") and string-length(translate(.//a,"0123456789", "0123456789")) > 0] | 
+    // Find element confirming successfull creation of bugreport
     {
-      List<WebElement> elements = driver.findElements(By.cssSelector("#bugzilla-body > dl > dt"));
+      List<WebElement> elements = driver.findElements(By.xpath("//*[@id=\"bugzilla-body\"]/dl/dt[starts-with(text(),\'Bug \') and contains(text()[2], \" has been successfully created\") and string-length(translate(.//a,\"0123456789\", \"0123456789\")) > 0]"));
       assert(elements.size() > 0);
     }
+    // 9 | verifyText | id=comment_text_0 | A simple test for creating a bugreport
+    assertEquals(driver.findElement(By.id("comment_text_0")).getText(), "A simple test for creating a bugreport");
+    // 10 | verifyText | id=short_desc_nonedit_display | TestCreateBug
+    assertEquals(driver.findElement(By.id("short_desc_nonedit_display")).getText(), "TestCreateBug");
+    // 11 | click | css=.bz_bug | 
+    driver.findElement(By.cssSelector(".bz_bug")).click();
+    // Start clean up
+    // 13 | select | id=bug_status | label=RESOLVED
+    {
+      WebElement dropdown = driver.findElement(By.id("bug_status"));
+      dropdown.findElement(By.xpath("//option[. = 'RESOLVED']")).click();
+    }
+    // 12 | select | id=resolution | label=FIXED
+    {
+      WebElement dropdown = driver.findElement(By.id("resolution"));
+      dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
+    }
+    // 14 | click | css=table:nth-child(2) > tbody > tr > td | 
+    driver.findElement(By.cssSelector("table:nth-child(2) > tbody > tr > td")).click();
+    // 15 | click | id=commit | 
+    driver.findElement(By.id("commit")).click();
   }
 
   @Test
   public void searchTest() {
     // Test name: SearchTest
-    // Step # | name | target | value | comment
-    // 1 | open | http://192.168.56.101/ |  | 
-    driver.get("http://192.168.56.101/");
-    // 2 | setWindowSize | 550x694 |  | 
-    // driver.manage().window().setSize(new Dimension(550, 694));
-    // 3 | click | id=query |  | 
-    driver.findElement(By.id("query")).click();
-    // 4 | click | id=bug_status |  | 
-    driver.findElement(By.id("bug_status")).click();
-    // 5 | select | id=bug_status | label=All | 
-    {
-      WebElement dropdown = driver.findElement(By.id("bug_status"));
-      dropdown.findElement(By.xpath("//option[. = 'All']")).click();
-    }
-    // 6 | click | css=option:nth-child(3) |  | 
-    driver.findElement(By.cssSelector("option:nth-child(3)")).click();
-    // 7 | click | id=product |  | 
-    driver.findElement(By.id("product")).click();
-    // 8 | select | id=product | label=TestProduct | 
+    // Step # | name | target | value
+    // 1 | open | / | 
+    driver.get(BASE_URL);
+    // 2 | click | linkText=New | 
+    // Initialise two bugs to be found
+    driver.findElement(By.linkText("New")).click();
+    // 3 | click | id=short_desc | 
+    driver.findElement(By.id("short_desc")).click();
+    // 4 | type | id=short_desc | searchforbugreport
+    driver.findElement(By.id("short_desc")).sendKeys("searchforbugreport");
+    // 5 | click | id=commit | 
+    driver.findElement(By.id("commit")).click();
+    // 6 | click | linkText=New | 
+    driver.findElement(By.linkText("New")).click();
+    // 7 | click | id=short_desc | 
+    driver.findElement(By.id("short_desc")).click();
+    // 8 | type | id=short_desc | searchforbugreport
+    driver.findElement(By.id("short_desc")).sendKeys("searchforbugreport");
+    // 9 | click | id=commit | 
+    driver.findElement(By.id("commit")).click();
+    // 10 | click | linkText=Search | 
+    driver.findElement(By.linkText("Search")).click();
+    // // 11 | select | id=bug_status | label=Open
+    // {
+    //   WebElement dropdown = driver.findElement(By.id("bug_status"));
+    //   dropdown.findElement(By.xpath("//option[. = 'Open']")).click();
+    // }
+    // 12 | select | id=product | label=TestProduct
     {
       WebElement dropdown = driver.findElement(By.id("product"));
       // Following line was exported by selenium IDE and doesn't work.
@@ -145,81 +148,101 @@ public class CreateBugTest {
       Select drpDown = new Select(dropdown);
       drpDown.selectByVisibleText("TestProduct");
     }
-    // 9 | click | css=#product > option:nth-child(2) |  | 
-    driver.findElement(By.cssSelector("#product > option:nth-child(2)")).click();
-    // 10 | click | id=content |  | 
+    // 13 | click | id=content | 
     driver.findElement(By.id("content")).click();
-    // 11 | type | id=content | for search test | 
-    driver.findElement(By.id("content")).sendKeys("for search test");
-    // 12 | click | id=search |  | 
+    // 14 | type | id=content | searchforbugreport
+    driver.findElement(By.id("content")).sendKeys("searchforbugreport");
+    // 15 | click | id=search | 
     driver.findElement(By.id("search")).click();
-    // 13 | verifyText | css=.bz_result_count | 2 bugs found. | 
+    // 17 | verifyText | css=.bz_result_count | 2 bugs found.
     assertEquals(driver.findElement(By.cssSelector(".bz_result_count")).getText(), "2 bugs found.");
+    // 18 | click | id=check_all | 
+    // Clean up created bugs
+    // 16 | click | id=mass_change | 
+    driver.findElement(By.id("mass_change")).click();
+    driver.findElement(By.id("check_all")).click();
+    // 19 | select | id=bug_status | label=RESOLVED
+    {
+      WebElement dropdown = driver.findElement(By.id("bug_status"));
+      // Following line was exported by selenium IDE and doesn't work.
+      // dropdown.findElement(By.xpath("//option[. = 'RESOLVED']")).click();
+
+      // Following is the workaround because xpath doesn't work.
+      Select drpDown = new Select(dropdown);
+      drpDown.selectByVisibleText("RESOLVED");
+      
+    }
+    // 20 | select | id=resolution | label=FIXED
+    {
+      WebElement dropdown = driver.findElement(By.id("resolution"));
+      dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
+    }
+    // 21 | click | id=commit | 
+    driver.findElement(By.id("commit")).click();
   }
 
 
   @Test
   public void changeStatusTest() {
     // Test name: ChangeStatusTest
-    // Step # | name | target | value | comment
-    // 1 | open | http://192.168.56.101/ |  | 
-    driver.get("http://192.168.56.101/");
-    // 2 | setWindowSize | 550x694 |  | 
-    // driver.manage().window().setSize(new Dimension(550, 694));
-    // 3 | click | linkText=Browse |  | 
-    driver.findElement(By.linkText("Browse")).click();
-    // 4 | click | linkText=TestComponent |  | 
-    driver.findElement(By.linkText("TestComponent")).click();
-    // 5 | click | linkText=2 |  | 
-    driver.findElement(By.linkText("2")).click();
-    // 6 | click | linkText=Clone This Bug |  | 
-    driver.findElement(By.linkText("Clone This Bug")).click();
-    // 7 | click | id=commit |  | 
+    // Step # | name | target | value
+    // 1 | open | / | 
+    driver.get(BASE_URL);
+    // 2 | click | linkText=New | 
+    // Create original bug
+    driver.findElement(By.linkText("New")).click();
+    // 3 | click | id=short_desc | 
+    driver.findElement(By.id("short_desc")).click();
+    // 4 | type | id=short_desc | ChangeStatustest
+    driver.findElement(By.id("short_desc")).sendKeys("ChangeStatustest");
+    // 5 | click | id=commit | 
     driver.findElement(By.id("commit")).click();
-    // 8 | click | id=bug_status |  | 
-    driver.findElement(By.id("bug_status")).click();
-    // 10 | select | id=bug_status | label=RESOLVED | 
+    // 6 | click | linkText=Clone This Bug | 
+    // Clone Bug
+    driver.findElement(By.linkText("Clone This Bug")).click();
+    // 7 | click | id=commit | 
+    driver.findElement(By.id("commit")).click();
+    // 9 | select | id=bug_status | label=RESOLVED
     {
       WebElement dropdown = driver.findElement(By.id("bug_status"));
       dropdown.findElement(By.xpath("//option[. = 'RESOLVED']")).click();
     }
-    // 9 | select | id=resolution | label=FIXED | 
+    // 8 | select | id=resolution | label=FIXED
     {
       WebElement dropdown = driver.findElement(By.id("resolution"));
-      try {
-        dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
-
-      } catch (Exception e) {
-        // TODO: handle exception
-        while(true){
-          System.out.println("BASE_URL");
-        }
-      }
+      dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
     }
-
-    // 11 | click | id=v4_bug_status |  | 
-    driver.findElement(By.id("v4_bug_status")).click();
-    // 12 | click | id=resolution |  | 
-    driver.findElement(By.id("resolution")).click();
-    // 13 | click | id=v2_resolution |  | 
-    driver.findElement(By.id("v2_resolution")).click();
-    // 14 | click | id=comment |  | 
+    // 10 | click | id=comment | 
     driver.findElement(By.id("comment")).click();
-    // 15 | click | id=comment |  | 
-    driver.findElement(By.id("comment")).click();
-    // 16 | type | id=comment | My new bug with status | 
-    driver.findElement(By.id("comment")).sendKeys("My new bug with status");
-    // 17 | click | id=commit |  | 
+    // 11 | type | id=comment | Fixed this bug 
+    driver.findElement(By.id("comment")).sendKeys("Fixed this bug ");
+    // 12 | click | id=commit | 
     driver.findElement(By.id("commit")).click();
-    // 18 | click | css=dl:nth-child(1) .bz_bug_link |  | 
-    driver.findElement(By.cssSelector("dl:nth-child(1) .bz_bug_link")).click();
-    // 19 | verifyText | id=static_bug_status | RESOLVED FIXED (edit) | 
+    // 13 | click | css=#bugzilla-body > dl > dt > a | 
+    driver.findElement(By.cssSelector("#bugzilla-body > dl > dt > a")).click();
+    // 14 | select | id=resolution | label=FIXED
+    {
+      WebElement dropdown = driver.findElement(By.id("resolution"));
+      dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
+    }
+    // 15 | verifyText | id=static_bug_status | RESOLVED FIXED (edit)
     assertEquals(driver.findElement(By.id("static_bug_status")).getText(), "RESOLVED FIXED (edit)");
-    // 20 | verifyText | id=comment_text_1 | My new bug with status | 
-    assertEquals(driver.findElement(By.id("comment_text_1")).getText(), "My new bug with status");
+    // 16 | verifyText | id=comment_text_1 | Fixed this bug
+    assertEquals(driver.findElement(By.id("comment_text_1")).getText(), "Fixed this bug");
+    // 17 | click | xpath=//*[@id="comment_text_0"]/a | 
+    // Clean up original report
+    driver.findElement(By.xpath("//*[@id=\"comment_text_0\"]/a")).click();
+    // 19 | select | id=bug_status | label=RESOLVED
+    {
+      WebElement dropdown = driver.findElement(By.id("bug_status"));
+      dropdown.findElement(By.xpath("//option[. = 'RESOLVED']")).click();
+    }
+    // 18 | select | id=resolution | label=FIXED
+    {
+      WebElement dropdown = driver.findElement(By.id("resolution"));
+      dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
+    }
+    // 20 | click | id=commit | 
+    driver.findElement(By.id("commit")).click();
   }
-  	
-	private static boolean isElementPresent(By by) {
-		return driver.findElements(by).size() > 0;
-	}	
 }
