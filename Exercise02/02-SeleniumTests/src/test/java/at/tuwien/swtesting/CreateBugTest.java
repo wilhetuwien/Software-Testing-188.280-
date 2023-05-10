@@ -64,6 +64,9 @@ public class CreateBugTest {
   @Test
   public void createBugTest() {
     // Test name: CreateBugTest
+    /*
+     * Creates a report and then sets it as resolved upon cleanup
+     */
     // Step # | name | target | value
     // 1 | open | / | 
     driver.get(BASE_URL);
@@ -111,6 +114,10 @@ public class CreateBugTest {
   @Test
   public void searchTest() {
     // Test name: SearchTest
+    /*
+     * Creates two reports with and searches for open issues with that name. 
+     * Upon cleanup it sets all issues found as resolved.
+     */
     // Step # | name | target | value
     // 1 | open | / | 
     driver.get(BASE_URL);
@@ -185,6 +192,10 @@ public class CreateBugTest {
   @Test
   public void changeStatusTest() {
     // Test name: ChangeStatusTest
+    /*
+     * Creates a report, then copies it and resolvs the copy. 
+     * Upon cleanup also resolves the original issue
+     */
     // Step # | name | target | value
     // 1 | open | / | 
     driver.get(BASE_URL);
