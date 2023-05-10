@@ -63,24 +63,4 @@ public class ShowBugPage extends AbstractPage{
         saveChanges.click();
         return PageFactory.initElements(driver, ProcessBugPage.class);
     }
-
-    public static ShowBugPage navigateTo(WebDriver driver, String baseUrl) {
-		driver.get(baseUrl + "enter_bug.cgi");
-		return PageFactory.initElements(driver, ShowBugPage.class);
-	}
-
-    public HomePage saveChanges(String statusValue, String resolutionValue) {
-		// WebElement loginName = driver.findElement(By.id("Bugzilla_login"));
-        status.findElement(By.xpath("//option[. = '" + statusValue + "']")).click();
-
-		// WebElement loginPassword = driver.findElement(By.id("Bugzilla_password"));
-        resolution.findElement(By.xpath("//option[. = '" + resolutionValue + "']")).click();
-
-		// WebElement loginButton = driver.findElement(By.id("log_in"));
-		saveChanges.submit();
-		
-        // TODO go to http://192.168.56.101/show_bug.cgi?id=197
-		return PageFactory.initElements(driver, HomePage.class);
-	}
-
 }

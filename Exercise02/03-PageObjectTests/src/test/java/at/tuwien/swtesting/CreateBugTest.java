@@ -38,6 +38,10 @@ public class CreateBugTest {
 	private static CreateBugPage createBugPage;
 	private static ShowBugPage showBugPage;
 
+
+  private String bugStatusResolved = "RESOLVED";
+  private String resolutionStatusFixed = "FIXED";
+
 	@BeforeAll
 	public static void setUpBeforeAll() {
 		WebDriverManager.getInstance(DRIVER_TYPE).setup(); 	
@@ -61,12 +65,14 @@ public class CreateBugTest {
 		homePage = HomePage.navigateTo(driver, BASE_URL);
 	}
   
-  @Test
+  // @Test
   public void createBugTest() {
     // Test name: CreateBugTest
     /*
      * Creates a report and then sets it as resolved upon cleanup
      */
+    String summaryText = "TestCreateBug";
+    String descriptionText = "A simple test for creating a bugreport";
     // 2 | click | linkText=New | 
     // driver.findElement(By.linkText("New")).click();
     createBugPage = homePage.gotoCreateBugPage();
@@ -74,12 +80,12 @@ public class CreateBugTest {
     // driver.findElement(By.id("short_desc")).click();
     // // 4 | type | id=short_desc | TestCreateBug
     // driver.findElement(By.id("short_desc")).sendKeys("TestCreateBug");
-    createBugPage.setSummary("TestCreateBug");
+    createBugPage.setSummary(summaryText);
     // 5 | click | id=comment | 
     // driver.findElement(By.id("comment")).click();
     // // 6 | type | id=comment | A simple test for creating a bugreport
     // driver.findElement(By.id("comment")).sendKeys("A simple test for creating a bugreport");
-    createBugPage.setDescription("A simple test for creating a bugreport");
+    createBugPage.setDescription(descriptionText);
     // 7 | click | id=commit | 
     // driver.findElement(By.id("commit")).click();
     showBugPage = createBugPage.submit();
@@ -94,55 +100,67 @@ public class CreateBugTest {
 
     // 9 | verifyText | id=comment_text_0 | A simple test for creating a bugreport
     // assertEquals(driver.findElement(By.id("comment_text_0")).getText(), "A simple test for creating a bugreport");
-    assertEquals(showBugPage.getFirstComment(), null);
+    assertEquals(showBugPage.getFirstComment(), descriptionText);
     // 10 | verifyText | id=short_desc_nonedit_display | TestCreateBug
-    assertEquals(driver.findElement(By.id("short_desc_nonedit_display")).getText(), "TestCreateBug");
+    // assertEquals(driver.findElement(By.id("short_desc_nonedit_display")).getText(), "TestCreateBug");
+    assertEquals(showBugPage.getSummary(), summaryText);
     // 11 | click | css=.bz_bug | 
-    driver.findElement(By.cssSelector(".bz_bug")).click();
+    // driver.findElement(By.cssSelector(".bz_bug")).click();
     // Start clean up
     // 13 | select | id=bug_status | label=RESOLVED
-    {
-      WebElement dropdown = driver.findElement(By.id("bug_status"));
-      dropdown.findElement(By.xpath("//option[. = 'RESOLVED']")).click();
-    }
+    // {
+    //   WebElement dropdown = driver.findElement(By.id("bug_status"));
+    //   dropdown.findElement(By.xpath("//option[. = 'RESOLVED']")).click();
+    // }
+    showBugPage.setBugStatus(bugStatusResolved);
     // 12 | select | id=resolution | label=FIXED
-    {
-      WebElement dropdown = driver.findElement(By.id("resolution"));
-      dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
-    }
+    // {
+    //   WebElement dropdown = driver.findElement(By.id("resolution"));
+    //   dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
+    // }
+    showBugPage.setResolution(resolutionStatusFixed);
     // 14 | click | css=table:nth-child(2) > tbody > tr > td | 
-    driver.findElement(By.cssSelector("table:nth-child(2) > tbody > tr > td")).click();
+    // driver.findElement(By.cssSelector("table:nth-child(2) > tbody > tr > td")).click();
     // 15 | click | id=commit | 
-    driver.findElement(By.id("commit")).click();
+    // driver.findElement(By.id("commit")).click();
+    showBugPage.submit();
   }
 
-  //@Test
+  @Test
   public void searchTest() {
     // Test name: SearchTest
     /*
      * Creates two reports with and searches for open issues with that name. 
      * Upon cleanup it sets all issues found as resolved.
      */
+    String summaryText = "searchforbugreport";
+
     // Step # | name | target | value
-    // 1 | open | / | 
-    driver.get(BASE_URL);
+    // // 1 | open | / | 
+    // driver.get(BASE_URL);
     // 2 | click | linkText=New | 
     // Initialise two bugs to be found
-    driver.findElement(By.linkText("New")).click();
-    // 3 | click | id=short_desc | 
-    driver.findElement(By.id("short_desc")).click();
-    // 4 | type | id=short_desc | searchforbugreport
-    driver.findElement(By.id("short_desc")).sendKeys("searchforbugreport");
-    // 5 | click | id=commit | 
-    driver.findElement(By.id("commit")).click();
-    // 6 | click | linkText=New | 
-    driver.findElement(By.linkText("New")).click();
-    // 7 | click | id=short_desc | 
-    driver.findElement(By.id("short_desc")).click();
-    // 8 | type | id=short_desc | searchforbugreport
-    driver.findElement(By.id("short_desc")).sendKeys("searchforbugreport");
-    // 9 | click | id=commit | 
-    driver.findElement(By.id("commit")).click();
+    // driver.findElement(By.linkText("New")).click();
+    createBugPage = homePage.gotoCreateBugPage();
+    // // 3 | click | id=short_desc | 
+    // driver.findElement(By.id("short_desc")).click();
+    // // 4 | type | id=short_desc | searchforbugreport
+    // driver.findElement(By.id("short_desc")).sendKeys("searchforbugreport");
+    createBugPage.setSummary(summaryText);
+    // // 5 | click | id=commit | 
+    // driver.findElement(By.id("commit")).click();
+    createBugPage.submit();
+    // // 6 | click | linkText=New | 
+    // driver.findElement(By.linkText("New")).click();
+    createBugPage = homePage.gotoCreateBugPage();
+    // // 7 | click | id=short_desc | 
+    // driver.findElement(By.id("short_desc")).click();
+    // // 8 | type | id=short_desc | searchforbugreport
+    // driver.findElement(By.id("short_desc")).sendKeys("searchforbugreport");
+    createBugPage.setSummary(summaryText);
+    // // 9 | click | id=commit | 
+    // driver.findElement(By.id("commit")).click();
+    createBugPage.submit();
     // 10 | click | linkText=Search | 
     driver.findElement(By.linkText("Search")).click();
     // // 11 | select | id=bug_status | label=Open

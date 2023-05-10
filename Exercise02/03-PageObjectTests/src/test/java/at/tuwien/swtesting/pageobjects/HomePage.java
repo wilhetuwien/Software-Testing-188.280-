@@ -37,6 +37,10 @@ public class HomePage extends AbstractPage {
 		return CreateBugPage.navigateTo(driver, baseUrl);
 	}
 
+	public SearchPage gotoSeachPage() {
+		return SearchPage.navigateTo(driver, baseUrl);
+	}
+
 	public HomePage logout() {
 		if (isLoggedin()) {
 			WebElement logoutLink = driver.findElement(By.linkText("Log out"));
