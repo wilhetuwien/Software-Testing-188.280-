@@ -20,7 +20,6 @@ public class CreateBugPage extends AbstractPage{
 	@FindBy(id = "commit")
 	private WebElement commit;
 
-    
 	public CreateBugPage(WebDriver driver) {
 		super(driver);
 	}

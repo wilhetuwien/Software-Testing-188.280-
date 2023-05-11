@@ -18,7 +18,7 @@ public class SearchPage extends AbstractPage{
 	private WebElement product;
 
 	@FindBy(id = "content")
-	private WebElement query;
+	private WebElement search;
 
 	@FindBy(id = "search")
 	private WebElement commit;
@@ -43,6 +43,19 @@ public class SearchPage extends AbstractPage{
         drpDown.selectByVisibleText(status);
     }
 
-    public void setProduct(String product)
+    public void setProduct(String productString){
+		Select drpDown = new Select(product);
+		drpDown.selectByVisibleText("TestProduct");
+	}
+
+	public void setSearch(String searchTerm){
+        search.clear();
+		search.sendKeys(searchTerm);
+	}
+
+	public BugListPage submit(){
+		commit.click();
+		return PageFactory.initElements(driver, BugListPage.class);
+	}
 
 }

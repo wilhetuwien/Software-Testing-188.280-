@@ -11,13 +11,21 @@ public class ProcessBugPage extends AbstractPage {
     
 	@FindBy(id = "commit")
 	private WebElement saveChanges;
+    
+	@FindBy(css = "#bugzilla-body > dl > dt > a")
+	private WebElement firstBugInList;
 
 	public ProcessBugPage(WebDriver driver) {
 		super(driver);
 	}
 
     protected boolean isMatchingPage() {
-        String expectedPageTitleRegex = "[0-9]+ processed";
+        String expectedPageTitleRegex = ".+ processed";
         return driver.getTitle().matches(expectedPageTitleRegex);
     }
+
+	public ShowBugPage gotoFirstBugInList(){
+		firstBugInList.click();
+        return PageFactory.initElements(driver, ShowBugPage.class);
+	}
 }

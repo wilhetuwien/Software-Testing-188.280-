@@ -13,15 +13,21 @@ import org.openqa.selenium.WebElement;
 
 import org.openqa.selenium.support.ui.Select;
 
+import at.tuwien.swtesting.pageobjects.BugListMassChangePage;
+import at.tuwien.swtesting.pageobjects.BugListPage;
 import at.tuwien.swtesting.pageobjects.CreateBugPage;
 import at.tuwien.swtesting.pageobjects.HomePage;
 import at.tuwien.swtesting.pageobjects.LoginPage;
+import at.tuwien.swtesting.pageobjects.ProcessBugPage;
+import at.tuwien.swtesting.pageobjects.SearchPage;
 import at.tuwien.swtesting.pageobjects.ShowBugPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
 
 import org.openqa.selenium.JavascriptExecutor;
 import java.util.*;
+
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 public class CreateBugTest {
   static JavascriptExecutor js;
@@ -37,6 +43,11 @@ public class CreateBugTest {
 	private static LoginPage loginPage;
 	private static CreateBugPage createBugPage;
 	private static ShowBugPage showBugPage;
+  private static SearchPage searchPage;
+  private static BugListPage bugListPage;
+  private static BugListMassChangePage bugListMassChangePage;
+  private static ProcessBugPage processBugPage;
+
 
 
   private String bugStatusResolved = "RESOLVED";
@@ -65,8 +76,8 @@ public class CreateBugTest {
 		homePage = HomePage.navigateTo(driver, BASE_URL);
 	}
   
-  // @Test
-  public void createBugTest() {
+  @Test
+  public void createBugPageObjectTest() {
     // Test name: CreateBugTest
     /*
      * Creates a report and then sets it as resolved upon cleanup
@@ -127,7 +138,7 @@ public class CreateBugTest {
   }
 
   @Test
-  public void searchTest() {
+  public void searchPageObjectTest() {
     // Test name: SearchTest
     /*
      * Creates two reports with and searches for open issues with that name. 
@@ -140,7 +151,7 @@ public class CreateBugTest {
     // driver.get(BASE_URL);
     // 2 | click | linkText=New | 
     // Initialise two bugs to be found
-    // driver.findElement(By.linkText("New")).click();
+    driver.findElement(By.linkText("New")).click();
     createBugPage = homePage.gotoCreateBugPage();
     // // 3 | click | id=short_desc | 
     // driver.findElement(By.id("short_desc")).click();
@@ -160,60 +171,72 @@ public class CreateBugTest {
     createBugPage.setSummary(summaryText);
     // // 9 | click | id=commit | 
     // driver.findElement(By.id("commit")).click();
-    createBugPage.submit();
+    showBugPage = createBugPage.submit();
     // 10 | click | linkText=Search | 
-    driver.findElement(By.linkText("Search")).click();
+    // driver.findElement(By.linkText("Search")).click();
+    searchPage = homePage.gotoSeachPage();
     // // 11 | select | id=bug_status | label=Open
     // {
     //   WebElement dropdown = driver.findElement(By.id("bug_status"));
     //   dropdown.findElement(By.xpath("//option[. = 'Open']")).click();
     // }
+    searchPage.setBugStatus("Open");
     // 12 | select | id=product | label=TestProduct
-    {
-      WebElement dropdown = driver.findElement(By.id("product"));
-      // Following line was exported by selenium IDE and doesn't work.
-      // dropdown.findElement(By.xpath("//option[. = 'TestProduct']")).click();
+    // {
+    //   WebElement dropdown = driver.findElement(By.id("product"));
+    //   // Following line was exported by selenium IDE and doesn't work.
+    //   // dropdown.findElement(By.xpath("//option[. = 'TestProduct']")).click();
 
-      // Following is the workaround because xpath doesn't work.
-      Select drpDown = new Select(dropdown);
-      drpDown.selectByVisibleText("TestProduct");
-    }
-    // 13 | click | id=content | 
-    driver.findElement(By.id("content")).click();
-    // 14 | type | id=content | searchforbugreport
-    driver.findElement(By.id("content")).sendKeys("searchforbugreport");
+    //   // Following is the workaround because xpath doesn't work.
+    //   Select drpDown = new Select(dropdown);
+    //   drpDown.selectByVisibleText("TestProduct");
+    // }
+    searchPage.setProduct("TestProduct");
+    //searchPage.setProduct("TestProduct");
+    // // 13 | click | id=content | 
+    // driver.findElement(By.id("content")).click();
+    // // 14 | type | id=content | searchforbugreport
+    // driver.findElement(By.id("content")).sendKeys("searchforbugreport");
+    searchPage.setSearch("searchforbugreport");
     // 15 | click | id=search | 
-    driver.findElement(By.id("search")).click();
+    // driver.findElement(By.id("search")).click();
+    bugListPage = searchPage.submit();
     // 17 | verifyText | css=.bz_result_count | 2 bugs found.
-    assertEquals(driver.findElement(By.cssSelector(".bz_result_count")).getText(), "2 bugs found.");
+    // assertEquals(driver.findElement(By.cssSelector(".bz_result_count")).getText(), "2 bugs found."); 
+    assertEquals(bugListPage.getResultCount(), "2 bugs found.");
     // 18 | click | id=check_all | 
     // Clean up created bugs
     // 16 | click | id=mass_change | 
-    driver.findElement(By.id("mass_change")).click();
-    driver.findElement(By.id("check_all")).click();
-    // 19 | select | id=bug_status | label=RESOLVED
-    {
-      WebElement dropdown = driver.findElement(By.id("bug_status"));
-      // Following line was exported by selenium IDE and doesn't work.
-      // dropdown.findElement(By.xpath("//option[. = 'RESOLVED']")).click();
+    // driver.findElement(By.id("mass_change")).click();
+    bugListMassChangePage = bugListPage.gotoMassChange();
+    // driver.findElement(By.id("check_all")).click();
+    bugListMassChangePage.setCheckAll();
+    // // 19 | select | id=bug_status | label=RESOLVED
+    // {
+    //   WebElement dropdown = driver.findElement(By.id("bug_status"));
+    //   // Following line was exported by selenium IDE and doesn't work.
+    //   // dropdown.findElement(By.xpath("//option[. = 'RESOLVED']")).click();
 
-      // Following is the workaround because xpath doesn't work.
-      Select drpDown = new Select(dropdown);
-      drpDown.selectByVisibleText("RESOLVED");
+    //   // Following is the workaround because xpath doesn't work.
+    //   Select drpDown = new Select(dropdown);
+    //   drpDown.selectByVisibleText("RESOLVED");
       
-    }
-    // 20 | select | id=resolution | label=FIXED
-    {
-      WebElement dropdown = driver.findElement(By.id("resolution"));
-      dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
-    }
+    // }
+    bugListMassChangePage.setBugStatus("RESOLVED");
+    // // 20 | select | id=resolution | label=FIXED
+    // {
+    //   WebElement dropdown = driver.findElement(By.id("resolution"));
+    //   dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
+    // }
+    bugListMassChangePage.setResolution("FIXED");
     // 21 | click | id=commit | 
-    driver.findElement(By.id("commit")).click();
+    // driver.findElement(By.id("commit")).click();
+    bugListMassChangePage.submit();
   }
 
 
-  //@Test
-  public void changeStatusTest() {
+  @Test
+  public void changeStatusPageObjectTest() {
     // Test name: ChangeStatusTest
     /*
      * Creates a report, then copies it and resolvs the copy. 
@@ -221,62 +244,79 @@ public class CreateBugTest {
      */
     // Step # | name | target | value
     // 1 | open | / | 
-    driver.get(BASE_URL);
+    // driver.get(BASE_URL);
     // 2 | click | linkText=New | 
     // Create original bug
-    driver.findElement(By.linkText("New")).click();
+    // driver.findElement(By.linkText("New")).click();
+    createBugPage = homePage.gotoCreateBugPage();
     // 3 | click | id=short_desc | 
-    driver.findElement(By.id("short_desc")).click();
-    // 4 | type | id=short_desc | ChangeStatustest
-    driver.findElement(By.id("short_desc")).sendKeys("ChangeStatustest");
+    // driver.findElement(By.id("short_desc")).click();
+    // // 4 | type | id=short_desc | ChangeStatustest
+    // driver.findElement(By.id("short_desc")).sendKeys("ChangeStatustest");
+    createBugPage.setSummary("ChangeStatustest");
     // 5 | click | id=commit | 
-    driver.findElement(By.id("commit")).click();
+    // driver.findElement(By.id("commit")).click();
+    showBugPage = createBugPage.submit();
     // 6 | click | linkText=Clone This Bug | 
     // Clone Bug
-    driver.findElement(By.linkText("Clone This Bug")).click();
+    // driver.findElement(By.linkText("Clone This Bug")).click();
+    createBugPage = showBugPage.cloneBug();
     // 7 | click | id=commit | 
-    driver.findElement(By.id("commit")).click();
+    // driver.findElement(By.id("commit")).click();
+    showBugPage = createBugPage.submit();
     // 9 | select | id=bug_status | label=RESOLVED
-    {
-      WebElement dropdown = driver.findElement(By.id("bug_status"));
-      dropdown.findElement(By.xpath("//option[. = 'RESOLVED']")).click();
-    }
+    // {
+    //   WebElement dropdown = driver.findElement(By.id("bug_status"));
+    //   dropdown.findElement(By.xpath("//option[. = 'RESOLVED']")).click();
+    // }
+    showBugPage.setBugStatus("RESOLVED");
     // 8 | select | id=resolution | label=FIXED
-    {
-      WebElement dropdown = driver.findElement(By.id("resolution"));
-      dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
-    }
+    // {
+    //   WebElement dropdown = driver.findElement(By.id("resolution"));
+    //   dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
+    // }
+    showBugPage.setResolution("FIXED");
     // 10 | click | id=comment | 
-    driver.findElement(By.id("comment")).click();
+    // driver.findElement(By.id("comment")).click();
     // 11 | type | id=comment | Fixed this bug 
-    driver.findElement(By.id("comment")).sendKeys("Fixed this bug ");
+    // driver.findElement(By.id("comment")).sendKeys("Fixed this bug ");
+    showBugPage.setComment("Fixed this bug ");
     // 12 | click | id=commit | 
-    driver.findElement(By.id("commit")).click();
+    // driver.findElement(By.id("commit")).click();
+    processBugPage = showBugPage.submit();
     // 13 | click | css=#bugzilla-body > dl > dt > a | 
-    driver.findElement(By.cssSelector("#bugzilla-body > dl > dt > a")).click();
+    // driver.findElement(By.cssSelector("#bugzilla-body > dl > dt > a")).click();
+    showBugPage = processBugPage.gotoFirstBugInList();
     // 14 | select | id=resolution | label=FIXED
-    {
-      WebElement dropdown = driver.findElement(By.id("resolution"));
-      dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
-    }
+    // {
+    //   WebElement dropdown = driver.findElement(By.id("resolution"));
+    //   dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
+    // }
+    // showBugPage.setResolution("FIXED");
     // 15 | verifyText | id=static_bug_status | RESOLVED FIXED (edit)
-    assertEquals(driver.findElement(By.id("static_bug_status")).getText(), "RESOLVED FIXED (edit)");
+    // assertEquals(driver.findElement(By.id("static_bug_status")).getText(), "RESOLVED FIXED (edit)");
+    assertEquals(showBugPage.getStaticBugStatus(), "RESOLVED FIXED (edit)");
     // 16 | verifyText | id=comment_text_1 | Fixed this bug
-    assertEquals(driver.findElement(By.id("comment_text_1")).getText(), "Fixed this bug");
+    // assertEquals(driver.findElement(By.id("comment_text_1")).getText(), "Fixed this bug");
+    assertEquals(showBugPage.getSecondComment(), "Fixed this bug");
     // 17 | click | xpath=//*[@id="comment_text_0"]/a | 
     // Clean up original report
-    driver.findElement(By.xpath("//*[@id=\"comment_text_0\"]/a")).click();
+    // driver.findElement(By.xpath("//*[@id=\"comment_text_0\"]/a")).click();
+    showBugPage = showBugPage.gotoOriginalBug();
     // 19 | select | id=bug_status | label=RESOLVED
-    {
-      WebElement dropdown = driver.findElement(By.id("bug_status"));
-      dropdown.findElement(By.xpath("//option[. = 'RESOLVED']")).click();
-    }
+    // {
+    //   WebElement dropdown = driver.findElement(By.id("bug_status"));
+    //   dropdown.findElement(By.xpath("//option[. = 'RESOLVED']")).click();
+    // }
+    showBugPage.setBugStatus("RESOLVED");
     // 18 | select | id=resolution | label=FIXED
-    {
-      WebElement dropdown = driver.findElement(By.id("resolution"));
-      dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
-    }
+    // {
+    //   WebElement dropdown = driver.findElement(By.id("resolution"));
+    //   dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
+    // }
+    showBugPage.setResolution("FIXED");
     // 20 | click | id=commit | 
-    driver.findElement(By.id("commit")).click();
+    // driver.findElement(By.id("commit")).click();
+    showBugPage.submit();
   }
 }
