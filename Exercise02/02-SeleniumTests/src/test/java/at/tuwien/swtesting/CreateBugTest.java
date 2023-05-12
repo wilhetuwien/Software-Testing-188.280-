@@ -68,6 +68,8 @@ public class CreateBugTest {
      * Creates a report and then sets it as resolved upon cleanup
      */
     // Step # | name | target | value
+    String summaryText = "TestCreateBug";
+    String commentText = "A simple test for creating a bugreport";
     // 1 | open | / | 
     driver.get(BASE_URL);
     // 2 | click | linkText=New | 
@@ -75,11 +77,11 @@ public class CreateBugTest {
     // 3 | click | id=short_desc | 
     driver.findElement(By.id("short_desc")).click();
     // 4 | type | id=short_desc | TestCreateBug
-    driver.findElement(By.id("short_desc")).sendKeys("TestCreateBug");
+    driver.findElement(By.id("short_desc")).sendKeys(summaryText);
     // 5 | click | id=comment | 
     driver.findElement(By.id("comment")).click();
     // 6 | type | id=comment | A simple test for creating a bugreport
-    driver.findElement(By.id("comment")).sendKeys("A simple test for creating a bugreport");
+    driver.findElement(By.id("comment")).sendKeys(commentText);
     // 7 | click | id=commit | 
     driver.findElement(By.id("commit")).click();
     // 8 | assertElementPresent | xpath=//*[@id="bugzilla-body"]/dl/dt[starts-with(text(),'Bug ') and contains(text()[2], " has been successfully created") and string-length(translate(.//a,"0123456789", "0123456789")) > 0] | 
@@ -89,9 +91,9 @@ public class CreateBugTest {
       assert(elements.size() > 0);
     }
     // 9 | verifyText | id=comment_text_0 | A simple test for creating a bugreport
-    assertEquals(driver.findElement(By.id("comment_text_0")).getText(), "A simple test for creating a bugreport");
+    assertEquals(driver.findElement(By.id("comment_text_0")).getText(), commentText);
     // 10 | verifyText | id=short_desc_nonedit_display | TestCreateBug
-    assertEquals(driver.findElement(By.id("short_desc_nonedit_display")).getText(), "TestCreateBug");
+    assertEquals(driver.findElement(By.id("short_desc_nonedit_display")).getText(), summaryText);
     // 11 | click | css=.bz_bug | 
     driver.findElement(By.cssSelector(".bz_bug")).click();
     // Start clean up
@@ -119,6 +121,7 @@ public class CreateBugTest {
      * Upon cleanup it sets all issues found as resolved.
      */
     // Step # | name | target | value
+    String summaryText = "searchforbugreport";
     // 1 | open | / | 
     driver.get(BASE_URL);
     // 2 | click | linkText=New | 
@@ -127,7 +130,7 @@ public class CreateBugTest {
     // 3 | click | id=short_desc | 
     driver.findElement(By.id("short_desc")).click();
     // 4 | type | id=short_desc | searchforbugreport
-    driver.findElement(By.id("short_desc")).sendKeys("searchforbugreport");
+    driver.findElement(By.id("short_desc")).sendKeys(summaryText);
     // 5 | click | id=commit | 
     driver.findElement(By.id("commit")).click();
     // 6 | click | linkText=New | 
@@ -135,7 +138,7 @@ public class CreateBugTest {
     // 7 | click | id=short_desc | 
     driver.findElement(By.id("short_desc")).click();
     // 8 | type | id=short_desc | searchforbugreport
-    driver.findElement(By.id("short_desc")).sendKeys("searchforbugreport");
+    driver.findElement(By.id("short_desc")).sendKeys(summaryText);
     // 9 | click | id=commit | 
     driver.findElement(By.id("commit")).click();
     // 10 | click | linkText=Search | 
@@ -158,7 +161,7 @@ public class CreateBugTest {
     // 13 | click | id=content | 
     driver.findElement(By.id("content")).click();
     // 14 | type | id=content | searchforbugreport
-    driver.findElement(By.id("content")).sendKeys("searchforbugreport");
+    driver.findElement(By.id("content")).sendKeys(summaryText);
     // 15 | click | id=search | 
     driver.findElement(By.id("search")).click();
     // 17 | verifyText | css=.bz_result_count | 2 bugs found.
@@ -197,6 +200,8 @@ public class CreateBugTest {
      * Upon cleanup also resolves the original issue
      */
     // Step # | name | target | value
+    String summaryText = "ChangeStatustest";
+    String commentText = "Fixed this bug";
     // 1 | open | / | 
     driver.get(BASE_URL);
     // 2 | click | linkText=New | 
@@ -205,7 +210,7 @@ public class CreateBugTest {
     // 3 | click | id=short_desc | 
     driver.findElement(By.id("short_desc")).click();
     // 4 | type | id=short_desc | ChangeStatustest
-    driver.findElement(By.id("short_desc")).sendKeys("ChangeStatustest");
+    driver.findElement(By.id("short_desc")).sendKeys(summaryText);
     // 5 | click | id=commit | 
     driver.findElement(By.id("commit")).click();
     // 6 | click | linkText=Clone This Bug | 
@@ -226,7 +231,7 @@ public class CreateBugTest {
     // 10 | click | id=comment | 
     driver.findElement(By.id("comment")).click();
     // 11 | type | id=comment | Fixed this bug 
-    driver.findElement(By.id("comment")).sendKeys("Fixed this bug ");
+    driver.findElement(By.id("comment")).sendKeys(commentText);
     // 12 | click | id=commit | 
     driver.findElement(By.id("commit")).click();
     // 13 | click | css=#bugzilla-body > dl > dt > a | 
@@ -239,7 +244,7 @@ public class CreateBugTest {
     // 15 | verifyText | id=static_bug_status | RESOLVED FIXED (edit)
     assertEquals(driver.findElement(By.id("static_bug_status")).getText(), "RESOLVED FIXED (edit)");
     // 16 | verifyText | id=comment_text_1 | Fixed this bug
-    assertEquals(driver.findElement(By.id("comment_text_1")).getText(), "Fixed this bug");
+    assertEquals(driver.findElement(By.id("comment_text_1")).getText(), commentText);
     // 17 | click | xpath=//*[@id="comment_text_0"]/a | 
     // Clean up original report
     driver.findElement(By.xpath("//*[@id=\"comment_text_0\"]/a")).click();

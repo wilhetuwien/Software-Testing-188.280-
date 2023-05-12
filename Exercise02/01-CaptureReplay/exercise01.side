@@ -132,16 +132,6 @@
       ],
       "value": "TestCreateBug"
     }, {
-      "id": "03b3aab4-82b7-4ba5-b588-e678797a46b4",
-      "comment": "",
-      "command": "click",
-      "target": "css=.bz_bug",
-      "targets": [
-        ["css=.bz_bug", "css:finder"],
-        ["xpath=//body", "xpath:position"]
-      ],
-      "value": ""
-    }, {
       "id": "79fcab4b-70e7-4871-b9c7-d624865c28ff",
       "comment": "Start clean up",
       "command": "select",
@@ -601,13 +591,6 @@
       ],
       "value": ""
     }, {
-      "id": "46f2419d-1e60-4ff7-a3a5-ca27a71d1a71",
-      "comment": "",
-      "command": "select",
-      "target": "id=resolution",
-      "targets": [],
-      "value": "label=FIXED"
-    }, {
       "id": "767219fa-4f14-4843-aa7b-64c5aeacd1cf",
       "comment": "",
       "command": "verifyText",
@@ -646,19 +629,19 @@
       ],
       "value": ""
     }, {
-      "id": "dd40e8bc-8614-4568-959a-4c150e457fa7",
-      "comment": "",
-      "command": "select",
-      "target": "id=resolution",
-      "targets": [],
-      "value": "label=FIXED"
-    }, {
       "id": "90e4c7aa-8ebc-4d1a-b235-00be3b6530cf",
       "comment": "",
       "command": "select",
       "target": "id=bug_status",
       "targets": [],
       "value": "label=RESOLVED"
+    }, {
+      "id": "dd40e8bc-8614-4568-959a-4c150e457fa7",
+      "comment": "",
+      "command": "select",
+      "target": "id=resolution",
+      "targets": [],
+      "value": "label=FIXED"
     }, {
       "id": "a86ac063-0dd5-4d1e-aabd-f213bb985e84",
       "comment": "",
