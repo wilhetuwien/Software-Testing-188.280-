@@ -33,8 +33,6 @@ public class CreateBugTest {
   static JavascriptExecutor js;
 
 	private static final String BASE_URL = "http://192.168.56.101/";
-	private static final String USERNAME = "admin@example.com";
-	private static final String PASSWORD = "Bugzilla1";
 	
 	private static final DriverManagerType DRIVER_TYPE = DriverManagerType.CHROME;
 

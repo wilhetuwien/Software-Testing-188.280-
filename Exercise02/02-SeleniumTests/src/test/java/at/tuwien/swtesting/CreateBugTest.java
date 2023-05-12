@@ -94,8 +94,6 @@ public class CreateBugTest {
     assertEquals(driver.findElement(By.id("comment_text_0")).getText(), commentText);
     // 10 | verifyText | id=short_desc_nonedit_display | TestCreateBug
     assertEquals(driver.findElement(By.id("short_desc_nonedit_display")).getText(), summaryText);
-    // 11 | click | css=.bz_bug | 
-    driver.findElement(By.cssSelector(".bz_bug")).click();
     // Start clean up
     // 13 | select | id=bug_status | label=RESOLVED
     {
@@ -107,8 +105,6 @@ public class CreateBugTest {
       WebElement dropdown = driver.findElement(By.id("resolution"));
       dropdown.findElement(By.xpath("//option[. = 'FIXED']")).click();
     }
-    // 14 | click | css=table:nth-child(2) > tbody > tr > td | 
-    driver.findElement(By.cssSelector("table:nth-child(2) > tbody > tr > td")).click();
     // 15 | click | id=commit | 
     driver.findElement(By.id("commit")).click();
   }
@@ -143,11 +139,6 @@ public class CreateBugTest {
     driver.findElement(By.id("commit")).click();
     // 10 | click | linkText=Search | 
     driver.findElement(By.linkText("Search")).click();
-    // // 11 | select | id=bug_status | label=Open
-    // {
-    //   WebElement dropdown = driver.findElement(By.id("bug_status"));
-    //   dropdown.findElement(By.xpath("//option[. = 'Open']")).click();
-    // }
     // 12 | select | id=product | label=TestProduct
     {
       WebElement dropdown = driver.findElement(By.id("product"));
@@ -166,10 +157,10 @@ public class CreateBugTest {
     driver.findElement(By.id("search")).click();
     // 17 | verifyText | css=.bz_result_count | 2 bugs found.
     assertEquals(driver.findElement(By.cssSelector(".bz_result_count")).getText(), "2 bugs found.");
-    // 18 | click | id=check_all | 
     // Clean up created bugs
     // 16 | click | id=mass_change | 
     driver.findElement(By.id("mass_change")).click();
+    // 18 | click | id=check_all | 
     driver.findElement(By.id("check_all")).click();
     // 19 | select | id=bug_status | label=RESOLVED
     {

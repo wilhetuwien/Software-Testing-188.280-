@@ -4,6 +4,6 @@ Feature: Login to Bugzilla
   Scenario: Login as user admin
     Given I am on the homepage
     When I go to the loginpage
-	And I login as user "admin@example.com" with password "Test1234"
+	And I login as user "admin@example.com" with password "Bugzilla1"
     Then I should be on the homepage
 	And I should be logged in

@@ -32,6 +32,14 @@ public class HomePage extends AbstractPage {
 	public LoginPage gotoLoginPage() {
 		return LoginPage.navigateTo(driver, baseUrl);
 	}
+	
+	public CreateBugPage gotoCreateBugPage() {
+		return CreateBugPage.navigateTo(driver, baseUrl);
+	}
+
+	public SearchPage gotoSeachPage() {
+		return SearchPage.navigateTo(driver, baseUrl);
+	}
 
 	public HomePage logout() {
 		if (isLoggedin()) {

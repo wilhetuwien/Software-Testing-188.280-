@@ -22,7 +22,8 @@ import at.tuwien.swtesting.pageobjects.LoginPage;
 
 public class LoginSteps {
 	
-	private static final String BASE_URL = "http://192.168.174.128/";
+
+	private static final String BASE_URL = "http://192.168.56.101/";
 	private static final DriverManagerType DRIVER_TYPE = DriverManagerType.CHROME;
 
 	private WebDriver driver;
