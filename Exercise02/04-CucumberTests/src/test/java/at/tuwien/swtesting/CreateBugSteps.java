@@ -16,17 +16,23 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
-
+import at.tuwien.swtesting.pageobjects.CreateBugPage;
 import at.tuwien.swtesting.pageobjects.HomePage;
 import at.tuwien.swtesting.pageobjects.LoginPage;
+import at.tuwien.swtesting.pageobjects.ShowBugPage;
 
 public class CreateBugSteps {
 	private static final String BASE_URL = "http://192.168.56.101/";
+	private static final String USERNAME = "admin@example.com";
+	private static final String PASSWORD = "Bugzilla1";
+
 	private static final DriverManagerType DRIVER_TYPE = DriverManagerType.CHROME;
 
 	private WebDriver driver;
 	private HomePage homePage;
 	private LoginPage loginPage;
+	private CreateBugPage createBugPage;
+	private ShowBugPage showBugPage;
 	
 	@Before
 	public void setUpBeforeClass() {
@@ -39,30 +45,61 @@ public class CreateBugSteps {
 		driver.close();
 		driver.quit();
 	}
-	
 
-	@Given("I am on the homepage")
-	public void i_am_on_the_homepage() {
+	@Given("I am logged in on the homepage")
+	public void i_am_logged_in_on_the_homepage() {
 		homePage = HomePage.navigateTo(driver, BASE_URL);
-	}
-
-	@When("I go to the loginpage")
-	public void i_goto_the_loginpage() {
 		loginPage = homePage.gotoLoginPage();
+		homePage = loginPage.login(USERNAME, PASSWORD);
 	}
 
-	@When("I login as user {string} with password {string}")
-	public void i_login_as_user_with_password(String username, String password) {
-		homePage = loginPage.login(username, password);
+
+	@When("I go to the createbugpage")
+	public void go_to_createbugpage() {
+		createBugPage = homePage.gotoCreateBugPage();
 	}
 
-	@Then("I should be on the homepage")
-	public void i_should_be_on_the_homepage() {
-		assertEquals("Bugzilla Main Page", homePage.getTitle());
+	@When("I add a summary {string}")
+	public void add_summary(String summary) {
+		createBugPage.setSummary(summary);
 	}
 
-	@Then("I should be logged in")
-	public void i_should_be_logged_in() {
-		assertTrue(homePage.isLoggedin());
+	@When("I add a description {string}")
+	public void add_description(String description) {
+		createBugPage.setDescription(description);
 	}
+
+	@When("I submit the bug")
+	public void submit_bug() {
+		showBugPage = createBugPage.submit();
+	}
+
+	@Then("I should be on the showbugpage")
+	public void i_should_be_on_the_showbugpage() {
+        String expectedPageTitleRegex = "[0-9]+ – .+";
+		assertTrue(showBugPage.getTitle().matches(expectedPageTitleRegex));
+	}
+
+	@Then("there should be a bugcreationelement present")
+	public void is_bug_creation_element_present() {
+		assert(showBugPage.getNumberOfBugCreationElements() > 0);
+	}
+
+	@Then("the first comment should be {string}")
+	public void first_comment_is(String comment) {
+		assertEquals(showBugPage.getFirstComment(), comment);
+	}
+
+	@Then("the summary should be {string}")
+	public void summary_is(String summary) {
+		assertEquals(showBugPage.getSummary(), summary);
+	}
+
+	@Then("I clean up after my createbugtest")
+	public void i_clean_up_after_my_createbugtest() {
+		showBugPage.setBugStatus("RESOLVED");
+		showBugPage.setResolution("FIXED");
+		showBugPage.submit();
+	}
+
 }

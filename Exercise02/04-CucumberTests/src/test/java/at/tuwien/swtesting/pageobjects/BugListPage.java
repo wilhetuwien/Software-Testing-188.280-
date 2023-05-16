@@ -16,12 +16,13 @@ public class BugListPage extends AbstractPage{
     @FindBy(id = "mass_change")
     private WebElement masschange;
 
-    
-    
-
 	public BugListPage(WebDriver driver) {
 		super(driver);
 	}
+
+    public String getTitle(){
+        return driver.getTitle();
+    }
 
     protected boolean isMatchingPage() {
         String expectedPageTitleRegex = "Bug List";

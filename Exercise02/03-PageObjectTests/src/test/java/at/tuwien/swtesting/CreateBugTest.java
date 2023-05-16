@@ -109,7 +109,6 @@ public class CreateBugTest {
      */
     String summaryText = "searchforbugreport";
 
-    driver.findElement(By.linkText("New")).click();
     createBugPage = homePage.gotoCreateBugPage();
     createBugPage.setSummary(summaryText);
     createBugPage.submit();

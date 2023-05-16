@@ -24,6 +24,10 @@ public class ProcessBugPage extends AbstractPage {
         return driver.getTitle().matches(expectedPageTitleRegex);
     }
 
+	public String getTitle(){
+		return driver.getTitle();
+	}
+
 	public ShowBugPage gotoFirstBugInList(){
 		firstBugInList.click();
         return PageFactory.initElements(driver, ShowBugPage.class);

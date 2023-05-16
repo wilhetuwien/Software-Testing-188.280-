@@ -54,6 +54,10 @@ public class ShowBugPage extends AbstractPage{
         return driver.getTitle().matches(expectedPageTitleRegex);
     }
 
+    public String getTitle(){
+        return driver.getTitle();
+    }
+
     public int getNumberOfBugCreationElements(){
         return bugCreatedElements.size();
     }
