@@ -1,3 +1,8 @@
+/*
+ * William Hedlund
+ * 12233006
+ * exercise 2 assignment 4
+ */
 package at.tuwien.swtesting;
 
 import io.cucumber.java.en.Given;

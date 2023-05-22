@@ -1,3 +1,8 @@
+/*
+ * William Hedlund
+ * 12233006
+ * exercise 2 assignment 2
+ */
 package at.tuwien.swtesting;
 
 import org.junit.jupiter.api.Test;

@@ -441,7 +441,7 @@
       "value": ""
     }, {
       "id": "427b2a5f-422d-47c2-b171-57a0b9b15a4f",
-      "comment": "Create original bug",
+      "comment": "Create bug",
       "command": "click",
       "target": "linkText=New",
       "targets": [
@@ -619,7 +619,7 @@
       "value": "Fixed this bug"
     }, {
       "id": "e83847cf-fc23-4691-be40-5409db9b12be",
-      "comment": "Clean up original report",
+      "comment": "Clean up ",
       "command": "click",
       "target": "xpath=//*[@id=\"comment_text_0\"]/a",
       "targets": [

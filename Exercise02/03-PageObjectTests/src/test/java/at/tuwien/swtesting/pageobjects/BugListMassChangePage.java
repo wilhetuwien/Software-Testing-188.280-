@@ -1,3 +1,8 @@
+/*
+ * William Hedlund
+ * 12233006
+ * exercise 2 assignment 3
+ */
 package at.tuwien.swtesting.pageobjects;
 
 import java.util.List;
