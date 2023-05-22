@@ -1,0 +1,9 @@
+With 'flakiness' it is meant that the test is non-deterministic and that a failed test can be caused by something other than a bug in the software being tested. This makes the it very difficult to evaluate the quality of the software because the tests can not necesarly be trusted. In the paper 'flakiness' is measured as the sum of all failures seen in each build.
+
+
+
+In the paper four different wait strategies is used: 'no wait', 'explicit wait', 'thread wait' and 'angular wait'. In the result of RQ2 it is mentioned that 'thread wait' has the lowest score in test flakiness but that the number of unique tests that fail is the highest.
+
+
+
+Effects of restarting the browser between each test depended on the driver. Chrome showed longer build times when restarting, but it did not seem to affect the flakiness of the tests. Other drivers like firefox was still too slow and HtmlUnit remained ery flaky.
