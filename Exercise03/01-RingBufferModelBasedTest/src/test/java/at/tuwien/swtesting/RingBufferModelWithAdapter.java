@@ -6,13 +6,11 @@ import nz.ac.waikato.modeljunit.FsmModel;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import at.tuwien.swtesting.RingBuffer;
-
 
 public class RingBufferModelWithAdapter implements FsmModel {
 	private static final int CAPACITY = 3;
 	private int size = 0;
-    private RingBuffer ringBuffer = new RingBuffer<>(CAPACITY);
+    private RingBuffer<Integer> ringBuffer = new RingBuffer<>(CAPACITY);
 
     private int[] items = {-1, -1, -1};
     
@@ -45,7 +43,6 @@ public class RingBufferModelWithAdapter implements FsmModel {
 
 	@Action
 	public void enqueue() {	
-        ringBuffer.enqueue(size);
 		size += 1;
 		if (size > CAPACITY) {
             size = CAPACITY;
@@ -59,6 +56,7 @@ public class RingBufferModelWithAdapter implements FsmModel {
         } else if (items[2] == -1) {
             items[2] = size;
         }
+        ringBuffer.enqueue(size);
 	}
 
 	public boolean dequeueGuard(){
@@ -66,12 +64,12 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	}
 	@Action
 	public void dequeue() {	
-        Object respons = ringBuffer.peek();
+        Object respons = ringBuffer.dequeue();
         assertEquals(items[0], respons);
-		size -= 1;
         items[0] = items[1];
         items[1] = items[2];
         items[2] = -1;
+		size -= 1;
 	}
 
 	public boolean dequeueFromEmptyBufferGuard(){
@@ -80,7 +78,7 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	@Action
 	public void dequeueFromEmptyBuffer() {	
 		//Throw error
-        Throwable exception = assertThrows(RuntimeException.class, () -> ringBuffer.peek());
+        Throwable exception = assertThrows(RuntimeException.class, () -> ringBuffer.dequeue());
         assertEquals("Empty ring buffer.", exception.getMessage());
         return;
 	}
