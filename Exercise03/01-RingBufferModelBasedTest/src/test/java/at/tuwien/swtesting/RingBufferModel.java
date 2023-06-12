@@ -5,7 +5,7 @@ import nz.ac.waikato.modeljunit.FsmModel;
 
 
 public class RingBufferModel implements FsmModel {
-	private static final int CAPACITY = 2;
+	private static final int CAPACITY = 3;
 	private int size = 0;
 
 	public Object getState() {
@@ -18,20 +18,47 @@ public class RingBufferModel implements FsmModel {
 		size = 0;
 	}
 
+	public boolean peekGuard(){
+		return size > 0;
+	}
 	@Action
 	public void peek() {	
-		//TODO: implement action
+		return;
 	}
 
 	@Action
 	public void enqueue() {	
-		//TODO: implement action
+		size += 1;
+		if (size > CAPACITY) size = CAPACITY;
 	}
 
+	public boolean dequeueGuard(){
+		return size > 0;
+	}
 	@Action
 	public void dequeue() {	
-		//TODO: implement action
+		size -= 1;
 	}
+
+	public boolean dequeueFromEmptyBufferGuard(){
+		return size == 0;
+	}
+	@Action
+	public void dequeueFromEmptyBuffer() {	
+		//Throw error
+		return;
+	}
+
+	public boolean peekEmptyBufferGuard(){
+		return size == 0;
+	}
+	@Action
+	public void peekEmptyBuffer() {	
+		//Throw error
+		return;
+	}
+
+
 	
 	//TODO: implement more actions
 }
