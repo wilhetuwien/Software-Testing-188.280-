@@ -1,0 +1,12 @@
+done (EMPTY, peek, EMPTY)
+done (EMPTY, peek, EMPTY)
+done (EMPTY, peek, EMPTY)
+done (EMPTY, peek, EMPTY)
+done (EMPTY, peek, EMPTY)
+done (EMPTY, peek, EMPTY)
+done (EMPTY, peek, EMPTY)
+done (EMPTY, peek, EMPTY)
+done (EMPTY, peek, EMPTY)
+done (EMPTY, peek, EMPTY)
+state coverage: 1/1
+transition coverage: 1/1
