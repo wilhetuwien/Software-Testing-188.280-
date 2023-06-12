@@ -1,3 +1,8 @@
+/*
+ * William Hedlund
+ * 12233006
+ * ex3 ass2
+ */
 package at.tuwien.swtesting;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +30,24 @@ public class RingBufferModelTest {
 		tester.addListener(new StopOnFailureListener());
 		
 		tester.generate(10);
+
+		tester.getModel().printMessage(stateCov.getName() + ": " + stateCov.toString());
+		tester.getModel().printMessage(transitionCov.getName() + ": " + transitionCov.toString());
+	}
+	
+
+	@Test
+	public void testModelWithAdapter() {
+		Tester tester = new GreedyTester(new RingBufferModelWithAdapter());
+		tester.buildGraph();
+		CoverageMetric stateCov = new StateCoverage();
+		CoverageMetric transitionCov = new TransitionCoverage();
+		tester.addListener(stateCov);
+		tester.addListener(transitionCov);
+		tester.addListener(new VerboseListener());
+		tester.addListener(new StopOnFailureListener());
+		
+		tester.generate(20);
 
 		tester.getModel().printMessage(stateCov.getName() + ": " + stateCov.toString());
 		tester.getModel().printMessage(transitionCov.getName() + ": " + transitionCov.toString());

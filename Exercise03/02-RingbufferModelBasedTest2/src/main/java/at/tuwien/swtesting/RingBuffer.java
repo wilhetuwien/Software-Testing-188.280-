@@ -1,3 +1,8 @@
+/*
+ * William Hedlund
+ * 12233006
+ * ex3 ass2
+ */
 package at.tuwien.swtesting;
 
 import java.util.Iterator;
