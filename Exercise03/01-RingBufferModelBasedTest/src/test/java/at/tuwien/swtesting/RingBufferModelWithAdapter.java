@@ -1,3 +1,8 @@
+/*
+ * William Hedlund
+ * 12233006
+ * ex3 ass1
+ */
 package at.tuwien.swtesting;
 
 import nz.ac.waikato.modeljunit.Action;
@@ -113,6 +118,4 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	public void isFull() {	
         assertEquals(getState() == "FULL", ringBuffer.isFull());
 	}
-	
-	//TODO: implement more actions
 }

@@ -1,3 +1,8 @@
+/*
+ * William Hedlund
+ * 12233006
+ * ex3 ass1
+ */
 package at.tuwien.swtesting;
 
 import org.junit.jupiter.api.Test;
