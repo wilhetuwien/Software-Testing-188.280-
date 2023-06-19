@@ -1,0 +1,12 @@
+/home/william/Skrivbord/software testing/Exercise03/04-BugzillaModelBasedTest/src/test/java/at/tuwien/swtesting/pageobjects/BugListMassChangePage.java
+/home/william/Skrivbord/software testing/Exercise03/04-BugzillaModelBasedTest/src/test/java/at/tuwien/swtesting/pageobjects/HomePage.java
+/home/william/Skrivbord/software testing/Exercise03/04-BugzillaModelBasedTest/src/test/java/at/tuwien/swtesting/ChangeStatusModelTest.java
+/home/william/Skrivbord/software testing/Exercise03/04-BugzillaModelBasedTest/src/test/java/at/tuwien/swtesting/pageobjects/ProcessBugPage.java
+/home/william/Skrivbord/software testing/Exercise03/04-BugzillaModelBasedTest/src/test/java/at/tuwien/swtesting/pageobjects/AbstractPage.java
+/home/william/Skrivbord/software testing/Exercise03/04-BugzillaModelBasedTest/src/test/java/at/tuwien/swtesting/pageobjects/ShowBugPage.java
+/home/william/Skrivbord/software testing/Exercise03/04-BugzillaModelBasedTest/src/test/java/at/tuwien/swtesting/pageobjects/CreateBugPage.java
+/home/william/Skrivbord/software testing/Exercise03/04-BugzillaModelBasedTest/src/test/java/at/tuwien/swtesting/pageobjects/LoginPage.java
+/home/william/Skrivbord/software testing/Exercise03/04-BugzillaModelBasedTest/src/test/java/at/tuwien/swtesting/pageobjects/BugListPage.java
+/home/william/Skrivbord/software testing/Exercise03/04-BugzillaModelBasedTest/src/test/java/at/tuwien/swtesting/StatusModelWithAdapter.java
+/home/william/Skrivbord/software testing/Exercise03/04-BugzillaModelBasedTest/src/test/java/at/tuwien/swtesting/pageobjects/SearchPage.java
+/home/william/Skrivbord/software testing/Exercise03/04-BugzillaModelBasedTest/src/test/java/at/tuwien/swtesting/BugzillaAdapter.java

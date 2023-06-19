@@ -15,10 +15,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.github.bonigarcia.wdm.config.DriverManagerType;
-
+import at.tuwien.swtesting.pageobjects.CreateBugPage;
 import at.tuwien.swtesting.pageobjects.HomePage;
 import at.tuwien.swtesting.pageobjects.LoginPage;
-
+import at.tuwien.swtesting.pageobjects.ShowBugPage;
 import nz.ac.waikato.modeljunit.GreedyTester;
 import nz.ac.waikato.modeljunit.StopOnFailureListener;
 import nz.ac.waikato.modeljunit.Tester;
@@ -29,9 +29,9 @@ import nz.ac.waikato.modeljunit.coverage.TransitionCoverage;
 
 public class ChangeStatusModelTest {
 
-	private static final String BASE_URL = "http://10.0.0.16/";			
+	private static final String BASE_URL = "http://192.168.56.101/";			
 	private static final String USERNAME = "admin@example.com";
-	private static final String PASSWORD = "Test1234";
+	private static final String PASSWORD = "Bugzilla1";
 	
 	private static final DriverManagerType DRIVER_TYPE = DriverManagerType.CHROME;
 	
@@ -61,6 +61,12 @@ public class ChangeStatusModelTest {
 		
 		adapter = new BugzillaAdapter();
 		// TODO: configure the adapter for passing it to the model
+		CreateBugPage createBugPage = homePage.gotoCreateBugPage();
+		createBugPage.setSummary("BugzillaAdapter");
+		ShowBugPage showBugPage = createBugPage.submit();
+		assertEquals(showBugPage.getStaticBugStatus(), "CONFIRMED (edit)");
+		adapter.setShowBugPage(showBugPage);
+
 	}
 
 	@AfterEach
@@ -82,7 +88,7 @@ public class ChangeStatusModelTest {
 		tester.addListener(new VerboseListener());
 		tester.addListener(new StopOnFailureListener());
 		
-		tester.generate(10);	// TODO: adjust to cover all states
+		tester.generate(50);	// TODO: adjust to cover all states
 
 		tester.getModel().printMessage(stateCov.getName() + ": " + stateCov.toString());
 		tester.getModel().printMessage(transitionCov.getName() + ": " + transitionCov.toString());

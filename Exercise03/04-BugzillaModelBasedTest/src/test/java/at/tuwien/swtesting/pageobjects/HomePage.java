@@ -1,3 +1,8 @@
+/*
+ * William Hedlund
+ * 12233006
+ * exercise 2 assignment 3
+ */
 package at.tuwien.swtesting.pageobjects;
 
 import org.openqa.selenium.By;
@@ -31,6 +36,14 @@ public class HomePage extends AbstractPage {
 	
 	public LoginPage gotoLoginPage() {
 		return LoginPage.navigateTo(driver, baseUrl);
+	}
+	
+	public CreateBugPage gotoCreateBugPage() {
+		return CreateBugPage.navigateTo(driver, baseUrl);
+	}
+
+	public SearchPage gotoSeachPage() {
+		return SearchPage.navigateTo(driver, baseUrl);
 	}
 
 	public HomePage logout() {
