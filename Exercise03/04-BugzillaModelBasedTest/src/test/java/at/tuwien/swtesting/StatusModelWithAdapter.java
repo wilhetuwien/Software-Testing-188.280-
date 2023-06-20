@@ -1,3 +1,8 @@
+/*
+ * William Hedlund
+ * 12233006
+ * ex3 ass4
+ */
 package at.tuwien.swtesting;
 
 import nz.ac.waikato.modeljunit.Action;
