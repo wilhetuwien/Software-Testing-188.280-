@@ -1,3 +1,3 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Ex03-As01-RingBufferModelBasedTest,at.tuwien.swtesting,RingBuffer,15,122,1,9,2,26,2,12,1,8
+Ex03-As01-RingBufferModelBasedTest,at.tuwien.swtesting,RingBuffer,5,132,0,10,1,27,1,13,1,8
 Ex03-As01-RingBufferModelBasedTest,at.tuwien.swtesting,RingBuffer.RingBufferIterator,42,0,4,0,7,0,6,0,4,0

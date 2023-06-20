@@ -69,10 +69,10 @@ public class RingBuffer&lt;Item&gt; implements Iterable&lt;Item&gt; {
 	public void enqueue(Item item) {
 <span class="fc" id="L70">		a[last] = item;</span>
 <span class="fc" id="L71">		last = (last + 1) % a.length; // wrap-around</span>
-<span class="pc bpc" id="L72" title="1 of 2 branches missed.">		if (N &lt; a.length) {</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">		if (N &lt; a.length) {</span>
 <span class="fc" id="L73">			N++;</span>
 <span class="fc" id="L74">		} else {</span>
-<span class="nc" id="L75">			first = (first + 1) % a.length;</span>
+<span class="fc" id="L75">			first = (first + 1) % a.length;</span>
 		}
 <span class="fc" id="L77">	}</span>
 
