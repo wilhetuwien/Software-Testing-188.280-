@@ -32,6 +32,9 @@ public class StatusModelWithAdapter implements FsmModel {
 
 	public void reset(boolean testing) {
 		status = BugStatus.NEW;
+		if (testing){
+			adapter.reset();
+		}
 	}
 
 	@Action

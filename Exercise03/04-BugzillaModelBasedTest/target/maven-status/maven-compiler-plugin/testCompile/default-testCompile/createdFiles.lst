@@ -1,0 +1,13 @@
+at/tuwien/swtesting/pageobjects/SearchPage.class
+at/tuwien/swtesting/StatusModelWithAdapter.class
+at/tuwien/swtesting/StatusModelWithAdapter$BugStatus.class
+at/tuwien/swtesting/pageobjects/BugListPage.class
+at/tuwien/swtesting/pageobjects/LoginPage.class
+at/tuwien/swtesting/pageobjects/AbstractPage.class
+at/tuwien/swtesting/pageobjects/CreateBugPage.class
+at/tuwien/swtesting/pageobjects/BugListMassChangePage.class
+at/tuwien/swtesting/BugzillaAdapter.class
+at/tuwien/swtesting/ChangeStatusModelTest.class
+at/tuwien/swtesting/pageobjects/ProcessBugPage.class
+at/tuwien/swtesting/pageobjects/ShowBugPage.class
+at/tuwien/swtesting/pageobjects/HomePage.class

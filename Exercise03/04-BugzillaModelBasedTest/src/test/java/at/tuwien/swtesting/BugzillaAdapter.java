@@ -1,5 +1,10 @@
 package at.tuwien.swtesting;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import at.tuwien.swtesting.pageobjects.CreateBugPage;
+import at.tuwien.swtesting.pageobjects.HomePage;
 import at.tuwien.swtesting.pageobjects.ProcessBugPage;
 import at.tuwien.swtesting.pageobjects.ShowBugPage;
 
@@ -10,11 +15,21 @@ import at.tuwien.swtesting.pageobjects.ShowBugPage;
  */
 public class BugzillaAdapter {
 
+	private HomePage homePage;
+	private CreateBugPage createBugPage;
 	private ShowBugPage showBugPage;
 	private ProcessBugPage processBugPage;
 
-	public void setShowBugPage(ShowBugPage showBugPage){
-		this.showBugPage = showBugPage;
+	public void setHomePage(HomePage homePage){
+		this.homePage = homePage;
+	}
+
+	public void reset(){
+		homePage = homePage.gotoHomePage();
+		
+		createBugPage = homePage.gotoCreateBugPage();
+		createBugPage.setSummary("BugzillaAdapter");
+		showBugPage = createBugPage.submit();
 	}
 
 	/** 
@@ -27,7 +42,7 @@ public class BugzillaAdapter {
 		processBugPage = showBugPage.submit();
 		showBugPage = processBugPage.gotoFirstBugInList();
 
-		return showBugPage.getStaticBugStatus() == "CONFIRMED (edit)";
+		return showBugPage.getStaticBugStatus().contains("CONFIRMED");
 	}
 
 	/** 
@@ -40,7 +55,7 @@ public class BugzillaAdapter {
 		processBugPage = showBugPage.submit();
 		showBugPage = processBugPage.gotoFirstBugInList();
 
-		return showBugPage.getStaticBugStatus() == "UNCONFIRMED (edit)";
+		return showBugPage.getStaticBugStatus().contains("UNCONFIRMED");
 	}
 
 	/** 
@@ -53,7 +68,7 @@ public class BugzillaAdapter {
 		processBugPage = showBugPage.submit();
 		showBugPage = processBugPage.gotoFirstBugInList();
 
-		return showBugPage.getStaticBugStatus() == "IN_PROGRESS (edit)";
+		return showBugPage.getStaticBugStatus().contains("IN_PROGRESS");
 	}
 
 	/** 
@@ -66,7 +81,7 @@ public class BugzillaAdapter {
 		processBugPage = showBugPage.submit();
 		showBugPage = processBugPage.gotoFirstBugInList();
 
-		return showBugPage.getStaticBugStatus() == "RESOLVED FIXED (edit)";
+		return showBugPage.getStaticBugStatus().contains("RESOLVED");
 	}
 
 	/** 
@@ -79,7 +94,7 @@ public class BugzillaAdapter {
 		processBugPage = showBugPage.submit();
 		showBugPage = processBugPage.gotoFirstBugInList();
 
-		return showBugPage.getStaticBugStatus() == "VERIFIED FIXED (edit)";
+		return showBugPage.getStaticBugStatus().contains("VERIFIED");
 	}
 
 	//TODO: implement further adapter methods

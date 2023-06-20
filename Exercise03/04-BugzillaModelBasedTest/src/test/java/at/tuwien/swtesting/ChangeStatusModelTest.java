@@ -61,12 +61,7 @@ public class ChangeStatusModelTest {
 		
 		adapter = new BugzillaAdapter();
 		// TODO: configure the adapter for passing it to the model
-		CreateBugPage createBugPage = homePage.gotoCreateBugPage();
-		createBugPage.setSummary("BugzillaAdapter");
-		ShowBugPage showBugPage = createBugPage.submit();
-		assertEquals(showBugPage.getStaticBugStatus(), "CONFIRMED (edit)");
-		adapter.setShowBugPage(showBugPage);
-
+		adapter.setHomePage(homePage);
 	}
 
 	@AfterEach
@@ -89,6 +84,7 @@ public class ChangeStatusModelTest {
 		tester.addListener(new StopOnFailureListener());
 		
 		tester.generate(50);	// TODO: adjust to cover all states
+		// tester.generate(1);	// TODO: adjust to cover all states
 
 		tester.getModel().printMessage(stateCov.getName() + ": " + stateCov.toString());
 		tester.getModel().printMessage(transitionCov.getName() + ": " + transitionCov.toString());
