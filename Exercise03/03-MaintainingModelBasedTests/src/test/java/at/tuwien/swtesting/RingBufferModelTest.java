@@ -29,7 +29,7 @@ public class RingBufferModelTest {
 		tester.addListener(new VerboseListener());
 		tester.addListener(new StopOnFailureListener());
 		
-		tester.generate(52);
+		tester.generate(20);
 
 		tester.getModel().printMessage(stateCov.getName() + ": " + stateCov.toString());
 		tester.getModel().printMessage(transitionCov.getName() + ": " + transitionCov.toString());

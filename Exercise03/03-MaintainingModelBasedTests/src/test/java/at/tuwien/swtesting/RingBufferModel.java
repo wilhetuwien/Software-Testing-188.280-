@@ -10,7 +10,7 @@ import nz.ac.waikato.modeljunit.FsmModel;
 
 
 public class RingBufferModel implements FsmModel {
-	private static final int CAPACITY = 3;
+	private int CAPACITY = 3;
 	private int size = 0;
 
 	public Object getState() {
@@ -21,6 +21,28 @@ public class RingBufferModel implements FsmModel {
 
 	public void reset(boolean testing) {
 		size = 0;
+		CAPACITY = 3;
+	}
+
+	public boolean decreaseCapacityGuard(){
+		return size < CAPACITY;
+	}
+	@Action
+	public void decreaseCapacity(){
+		CAPACITY -= 1;
+	}
+
+	public void increaseCapacity(){
+		CAPACITY += 1;
+	}
+
+	public boolean decreaseCapacityFullGuard(){
+		return CAPACITY == size;
+	}
+	@Action
+	public void decreaseCapacityFull(){
+		//Throws error
+		return;
 	}
 
 	public boolean peekGuard(){
@@ -31,6 +53,9 @@ public class RingBufferModel implements FsmModel {
 		return;
 	}
 
+	public boolean enqueueGuard(){
+		return CAPACITY > 0;
+	}
 	@Action
 	public void enqueue() {	
 		size += 1;
@@ -59,15 +84,6 @@ public class RingBufferModel implements FsmModel {
 	}
 	@Action
 	public void peekEmptyBuffer() {	
-		//Throw error
-		return;
-	}
-
-	public boolean setCapacityGuard(int newCapacity){
-		return size <= newCapacity;
-	}
-	@Action
-	public void setCapacity() {	
 		//Throw error
 		return;
 	}

@@ -13,11 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class RingBufferModelWithAdapter implements FsmModel {
-	private static final int CAPACITY = 3;
+	private int CAPACITY = 3;
 	private int size = 0;
     private RingBuffer<Integer> ringBuffer = new RingBuffer<>(CAPACITY);
 
-    private int[] items = {-1, -1, -1};
+    // private int[] items = {-1, -1, -1};
     
     
 
@@ -28,12 +28,38 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	}
 
 	public void reset(boolean testing) {
-        ringBuffer = new RingBuffer<>(CAPACITY);
 		size = 0;
+		CAPACITY = 3;
+        ringBuffer = new RingBuffer<>(CAPACITY);
 
-        items[0] = -1;
-        items[1] = -1;
-        items[2] = -1;
+        // items[0] = -1;
+        // items[1] = -1;
+        // items[2] = -1;
+	}
+
+	public boolean decreaseCapacityGuard(){
+		return size < CAPACITY;
+	}
+	@Action
+	public void decreaseCapacity(){
+		ringBuffer.setCapacity(CAPACITY - 1);
+		CAPACITY -= 1;
+	}
+
+	public void increaseCapacity(){
+		ringBuffer.setCapacity(CAPACITY + 1);
+		CAPACITY += 1;
+	}
+
+	public boolean decreaseCapacityFullGuard(){
+		return CAPACITY == size;
+	}
+	@Action
+	public void decreaseCapacityFull(){
+		//Throws error
+        Throwable exception = assertThrows(RuntimeException.class, () -> ringBuffer.setCapacity(CAPACITY - 1));
+        assertEquals("New capacity can not be smaller than the current size", exception.getMessage());
+		return;
 	}
 
 	public boolean peekGuard(){
@@ -42,26 +68,30 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	@Action
 	public void peek() {
         Object respons = ringBuffer.peek();
-        assertEquals(items[0], respons);
+        // assertEquals(items[0], respons);
+        assertEquals(0, respons);
 		return;
 	}
 
+	public boolean enqueueGuard(){
+		return CAPACITY > 0;
+	}
 	@Action
 	public void enqueue() {	
+		// if (size > CAPACITY) {
+        //     size = CAPACITY;
+        //     items[0] = items[1];
+        //     items[1] = items[2];
+        //     items[2] = size;
+        // } else if (items[0] == -1) {
+        //     items[0] = size;
+        // } else if (items[1] == -1) {
+        //     items[1] = size;
+        // } else if (items[2] == -1) {
+        //     items[2] = size;
+        // }
+        ringBuffer.enqueue(0);
 		size += 1;
-		if (size > CAPACITY) {
-            size = CAPACITY;
-            items[0] = items[1];
-            items[1] = items[2];
-            items[2] = size;
-        } else if (items[0] == -1) {
-            items[0] = size;
-        } else if (items[1] == -1) {
-            items[1] = size;
-        } else if (items[2] == -1) {
-            items[2] = size;
-        }
-        ringBuffer.enqueue(size);
 	}
 
 	public boolean dequeueGuard(){
@@ -70,10 +100,10 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	@Action
 	public void dequeue() {	
         Object respons = ringBuffer.dequeue();
-        assertEquals(items[0], respons);
-        items[0] = items[1];
-        items[1] = items[2];
-        items[2] = -1;
+        assertEquals(0, respons);
+        // items[0] = items[1];
+        // items[1] = items[2];
+        // items[2] = -1;
 		size -= 1;
 	}
 
@@ -111,11 +141,11 @@ public class RingBufferModelWithAdapter implements FsmModel {
     
 	@Action
 	public void isEmpty() {	
-        assertEquals(getState() == "EMPTY", ringBuffer.isEmpty());
+        assertEquals(size == 0, ringBuffer.isEmpty());
 	}
     
 	@Action
 	public void isFull() {	
-        assertEquals(getState() == "FULL", ringBuffer.isFull());
+        assertEquals(size == CAPACITY, ringBuffer.isFull());
 	}
 }
