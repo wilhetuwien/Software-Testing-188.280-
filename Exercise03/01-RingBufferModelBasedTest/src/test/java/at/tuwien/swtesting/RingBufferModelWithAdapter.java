@@ -31,6 +31,8 @@ public class RingBufferModelWithAdapter implements FsmModel {
         ringBuffer = new RingBuffer<>(CAPACITY);
 		size = 0;
 
+		// i know the following is not a suitable solution for tracking the expected value in the buffer
+		//  but couldn't come up with anything else
         items[0] = -1;
         items[1] = -1;
         items[2] = -1;
