@@ -1,0 +1,11 @@
+1.
+By using blocks of instructions the time for maintaining tests was greatly reduced. it also made it easy to reuse and create new tests.
+
+2.
+Online mbt means that the testing tools connect to the system to be tested and executes the test after generating it. In offline testing the test cases are first generated according the the provided model and then exectued on the system. In this paper the offline approach is used where tests are generated and then imported into the test tool.
+
+3.
+The calculation of ROI is compares the strategies of having testers manually define instructions and stepping through them vs having mbt where 180 test cases where generated from two scenarios and then executed by an automatic test tool. 
+Break even point: around 4th test cycle
+In this calculation of ROI the estimated time for the manual approach was based on experiences from previous versions of the system and therefor is an estimate. 
+
