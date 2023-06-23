@@ -17,8 +17,7 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	private int size = 0;
     private RingBuffer<Integer> ringBuffer = new RingBuffer<>(CAPACITY);
 
-    // private int[] items = {-1, -1, -1};
-    
+	private int itemsqueue = 0;    
     
 
 	public Object getState() {
@@ -31,10 +30,7 @@ public class RingBufferModelWithAdapter implements FsmModel {
 		size = 0;
 		CAPACITY = 3;
         ringBuffer = new RingBuffer<>(CAPACITY);
-
-        // items[0] = -1;
-        // items[1] = -1;
-        // items[2] = -1;
+		itemsqueue = 0;
 	}
 
 	public boolean decreaseCapacityGuard(){
@@ -68,8 +64,7 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	@Action
 	public void peek() {
         Object respons = ringBuffer.peek();
-        // assertEquals(items[0], respons);
-        assertEquals(0, respons);
+		assertEquals(itemsqueue - size, respons);
 		return;
 	}
 
@@ -78,20 +73,12 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	}
 	@Action
 	public void enqueue() {	
-		// if (size > CAPACITY) {
-        //     size = CAPACITY;
-        //     items[0] = items[1];
-        //     items[1] = items[2];
-        //     items[2] = size;
-        // } else if (items[0] == -1) {
-        //     items[0] = size;
-        // } else if (items[1] == -1) {
-        //     items[1] = size;
-        // } else if (items[2] == -1) {
-        //     items[2] = size;
-        // }
-        ringBuffer.enqueue(0);
+        ringBuffer.enqueue(itemsqueue);
 		size += 1;
+		if (size > CAPACITY){
+			size = CAPACITY;
+		}
+		itemsqueue += 1;
 	}
 
 	public boolean dequeueGuard(){
@@ -100,10 +87,7 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	@Action
 	public void dequeue() {	
         Object respons = ringBuffer.dequeue();
-        assertEquals(0, respons);
-        // items[0] = items[1];
-        // items[1] = items[2];
-        // items[2] = -1;
+		assertEquals(itemsqueue - size, respons);
 		size -= 1;
 	}
 

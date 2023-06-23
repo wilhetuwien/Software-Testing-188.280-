@@ -15,6 +15,7 @@ import nz.ac.waikato.modeljunit.FsmModel;
 public class RingBufferModelWithAdapter implements FsmModel {
 	private static final int CAPACITY = 1;
 	private int size = 0;
+	private int itemsqueue = 0;
 
 	private RingBuffer<Integer> ringBuffer = new RingBuffer<>(CAPACITY);
 
@@ -25,6 +26,7 @@ public class RingBufferModelWithAdapter implements FsmModel {
 
 	public void reset(boolean testing) {
 		size = 0;
+		itemsqueue = 0;
 		ringBuffer = new RingBuffer<>(CAPACITY);
 	}
 
@@ -33,15 +35,19 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	}
 	@Action
 	public void peek() {	
-		assertEquals(size, ringBuffer.peek());
+        Object respons = ringBuffer.peek();
+		assertEquals(itemsqueue - size, respons);
 		return;
 	}
 
 	@Action
 	public void enqueue() {	
+        ringBuffer.enqueue(itemsqueue);
 		size += 1;
-		if (size > CAPACITY) size = CAPACITY;
-		ringBuffer.enqueue(size);
+		if (size > CAPACITY){
+			size = CAPACITY;
+		}
+		itemsqueue += 1;
 	}
 
 	public boolean dequeueGuard(){
@@ -49,7 +55,8 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	}
 	@Action
 	public void dequeue() {	
-		assertEquals(size, ringBuffer.dequeue());
+        Object respons = ringBuffer.dequeue();
+		assertEquals(itemsqueue - size, respons);
 		size -= 1;
 	}
 

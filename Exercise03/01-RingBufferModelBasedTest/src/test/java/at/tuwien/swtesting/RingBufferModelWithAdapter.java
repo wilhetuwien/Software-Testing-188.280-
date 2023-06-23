@@ -17,7 +17,7 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	private int size = 0;
     private RingBuffer<Integer> ringBuffer = new RingBuffer<>(CAPACITY);
 
-    private int[] items = {-1, -1, -1};
+	private int itemsqueue = 0;
     
     
 
@@ -30,12 +30,7 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	public void reset(boolean testing) {
         ringBuffer = new RingBuffer<>(CAPACITY);
 		size = 0;
-
-		// i know the following is not a suitable solution for tracking the expected value in the buffer
-		//  but couldn't come up with anything else
-        items[0] = -1;
-        items[1] = -1;
-        items[2] = -1;
+		itemsqueue = 0;
 	}
 
 	public boolean peekGuard(){
@@ -44,26 +39,18 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	@Action
 	public void peek() {
         Object respons = ringBuffer.peek();
-        assertEquals(items[0], respons);
+		assertEquals(itemsqueue - size, respons);
 		return;
 	}
 
 	@Action
 	public void enqueue() {	
+        ringBuffer.enqueue(itemsqueue);
 		size += 1;
-		if (size > CAPACITY) {
-            size = CAPACITY;
-            items[0] = items[1];
-            items[1] = items[2];
-            items[2] = size;
-        } else if (items[0] == -1) {
-            items[0] = size;
-        } else if (items[1] == -1) {
-            items[1] = size;
-        } else if (items[2] == -1) {
-            items[2] = size;
-        }
-        ringBuffer.enqueue(size);
+		if (size > CAPACITY){
+			size = CAPACITY;
+		}
+		itemsqueue += 1;
 	}
 
 	public boolean dequeueGuard(){
@@ -72,10 +59,7 @@ public class RingBufferModelWithAdapter implements FsmModel {
 	@Action
 	public void dequeue() {	
         Object respons = ringBuffer.dequeue();
-        assertEquals(items[0], respons);
-        items[0] = items[1];
-        items[1] = items[2];
-        items[2] = -1;
+		assertEquals(itemsqueue - size, respons);
 		size -= 1;
 	}
 
@@ -113,11 +97,11 @@ public class RingBufferModelWithAdapter implements FsmModel {
     
 	@Action
 	public void isEmpty() {	
-        assertEquals(getState() == "EMPTY", ringBuffer.isEmpty());
+        assertEquals(size == 0, ringBuffer.isEmpty());
 	}
     
 	@Action
 	public void isFull() {	
-        assertEquals(getState() == "FULL", ringBuffer.isFull());
+        assertEquals(size == CAPACITY, ringBuffer.isFull());
 	}
 }
